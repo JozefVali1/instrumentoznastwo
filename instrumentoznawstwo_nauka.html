@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrumentoznawstwo – Materiał do Egzaminu</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #22263a;
+    --border: #2e3350;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --chord: #3b82f6;
+    --chord-bg: #1e2d4a;
+    --aero: #f59e0b;
+    --aero-bg: #2d2510;
+    --idio: #a855f7;
+    --idio-bg: #25163a;
+    --membr: #ef4444;
+    --membr-bg: #2d1515;
+    --theory: #10b981;
+    --theory-bg: #0e2a1f;
+    --mic: #06b6d4;
+    --mic-bg: #082030;
+    --exam: #f97316;
+    --exam-bg: #2d1a08;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.65; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: #10131e; border-bottom: 1px solid var(--border); padding: 10px 20px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  nav span { font-weight: 700; font-size: 13px; color: var(--muted); margin-right: 6px; }
+  nav a { padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text); transition: all 0.15s; }
+  nav a:hover { border-color: #fff; color: #fff; }
+  nav a.t { border-color: var(--theory); color: var(--theory); }
+  nav a.c { border-color: var(--chord); color: var(--chord); }
+  nav a.a { border-color: var(--aero); color: var(--aero); }
+  nav a.i { border-color: var(--idio); color: var(--idio); }
+  nav a.m { border-color: var(--membr); color: var(--membr); }
+  nav a.e { border-color: var(--exam); color: var(--exam); }
+
+  /* LAYOUT */
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: var(--muted); margin-bottom: 40px; font-size: 14px; }
+
+  /* SECTION HEADERS */
+  .section-header { display: flex; align-items: center; gap: 12px; margin: 48px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+  .section-header .dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .section-header h2 { font-size: 22px; font-weight: 700; }
+  .section-header .badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* CARDS */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .card-header { padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .card-header:hover { background: var(--bg3); }
+  .card-header h3 { font-size: 16px; font-weight: 700; }
+  .card-header .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+  .arrow { color: var(--muted); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; margin-left: 10px; }
+  .card-body { padding: 0 18px; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; }
+  .card-body.open { max-height: 4000px; padding: 0 18px 18px; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* INFO BOX */
+  .info-box { border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+  .info-box.chord { background: var(--chord-bg); border-left: 3px solid var(--chord); }
+  .info-box.aero { background: var(--aero-bg); border-left: 3px solid var(--aero); }
+  .info-box.idio { background: var(--idio-bg); border-left: 3px solid var(--idio); }
+  .info-box.membr { background: var(--membr-bg); border-left: 3px solid var(--membr); }
+  .info-box.theory { background: var(--theory-bg); border-left: 3px solid var(--theory); }
+  .info-box.mic { background: var(--mic-bg); border-left: 3px solid var(--mic); }
+  .info-box.exam { background: var(--exam-bg); border-left: 3px solid var(--exam); }
+
+  /* MIC SECTION */
+  .mic-header { font-size: 13px; font-weight: 700; color: var(--mic); text-transform: uppercase; letter-spacing: 0.8px; margin: 14px 0 6px; display: flex; align-items: center; gap: 6px; }
+  .mic-header::before { content: '🎙'; font-size: 14px; }
+  .mic-list { list-style: none; }
+  .mic-list li { padding: 4px 0; padding-left: 16px; position: relative; color: var(--text); font-size: 14px; }
+  .mic-list li::before { content: '▸'; position: absolute; left: 0; color: var(--mic); }
+  .mic-note { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 6px; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 6px; }
+
+  /* DATA ROW */
+  .data-row { display: flex; gap: 8px; margin: 5px 0; font-size: 14px; }
+  .data-label { color: var(--muted); min-width: 120px; flex-shrink: 0; }
+  .data-val { color: var(--text); font-weight: 500; }
+
+  /* EXAM SECTION */
+  .question { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+  .q-header { padding: 13px 16px; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; }
+  .q-header:hover { background: var(--bg3); }
+  .q-num { background: var(--exam-bg); color: var(--exam); font-weight: 800; font-size: 13px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--exam); flex-shrink: 0; }
+  .q-text { font-weight: 600; font-size: 14px; }
+  .q-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s; }
+  .q-answer.open { max-height: 1000px; padding: 0 16px 14px; }
+  .answer-box { background: var(--exam-bg); border: 1px solid var(--exam); border-radius: 7px; padding: 12px 14px; font-size: 14px; }
+  .answer-box strong { color: var(--exam); }
+
+  /* THEORY TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+  th { background: var(--bg3); color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* HIGHLIGHT */
+  .hl { color: var(--mic); font-weight: 600; }
+  .hl-y { color: var(--aero); font-weight: 600; }
+  .hl-g { color: var(--theory); font-weight: 600; }
+  .hl-p { color: var(--idio); font-weight: 600; }
+  .hl-r { color: var(--membr); font-weight: 600; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* IMPORTANT NOTE */
+  .important { background: #1a1200; border: 1px solid #b45309; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #fbbf24; margin: 10px 0; }
+  .important::before { content: '⚠ '; font-weight: 700; }
+
+  ul.normal { padding-left: 20px; }
+  ul.normal li { margin: 4px 0; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span>EGZAMIN</span>
+  <a class="t" href="#teoria">Teoria</a>
+  <a class="c" href="#chordo">Strunowe</a>
+  <a class="a" href="#aero">Dęte</a>
+  <a class="i" href="#idio">Idiofony</a>
+  <a class="m" href="#membr">Perkusja</a>
+  <a class="e" href="#egzamin">Pytania</a>
+</nav>
+
+<div class="wrap">
+  <h1>Instrumentoznawstwo</h1>
+  <p class="subtitle">Materiał do nauki na egzamin &nbsp;|&nbsp; Notatki + Mikrofonizacja &nbsp;|&nbsp; Bez głosu</p>
+
+  <!-- ═══════════════════════════════════════════ TEORIA ═══════════════════════════════════════════ -->
+  <div id="teoria" class="section-header">
+    <div class="dot" style="background: var(--theory)"></div>
+    <h2>Teoria podstawowa</h2>
+    <span class="badge" style="background: var(--theory-bg); color: var(--theory)">Podstawy</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Klasyfikacja instrumentów – Wibrator</h3>
+      <div class="tags">
+        <span class="tag" style="background:#0e2a1f;color:var(--theory)">MUST KNOW</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="important">Na egzaminie jest pytanie: podział instrumentów według wibratora!</div>
+      <table>
+        <tr><th>Klasa</th><th>Wibrator</th><th>Przykłady</th></tr>
+        <tr><td><span class="hl-g">Chordofony</span></td><td>Struna</td><td>Skrzypce, gitara, fortepian, harfa, kontrabas</td></tr>
+        <tr><td><span class="hl-y">Aerofony</span></td><td>Słup powietrza</td><td>Flet, klarnet, trąbka, puzon, tuba, organy</td></tr>
+        <tr><td><span class="hl-r">Membranofony</span></td><td>Membrana (naprężona skóra)</td><td>Werbel, kotły, bęben basowy, konga</td></tr>
+        <tr><td><span class="hl-p">Idiofony</span></td><td>Samo ciało instrumentu</td><td>Marimba, ksylofon, wibrafon, cymbały, harmonijka, akordeon</td></tr>
+        <tr><td style="color:var(--muted)">Elektrofony</td><td>Prąd elektryczny</td><td>Syntezatory</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Klasyfikacja wg incytatora (sposób wydobycia dźwięku)</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Incytator</th><th>Instrumenty</th></tr>
+        <tr><td>Smyczkowe (pocieranie)</td><td>Skrzypce, altówka, wiolonczela, kontrabas</td></tr>
+        <tr><td>Szarpane</td><td>Gitara akustyczna, harfa, klawesyn</td></tr>
+        <tr><td>Uderzane</td><td>Fortepian (młoteczki), marimba, ksylofon, werbel</td></tr>
+        <tr><td>Dęte</td><td>Flet, klarnet, trąbka – przepływ powietrza</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Budowa formalna instrumentu</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="data-row"><span class="data-label">Incytator</span><span class="data-val">Sposób wydobycia dźwięku (smyczek, palec, warga)</span></div>
+      <div class="data-row"><span class="data-label">Wibrator</span><span class="data-val">Element odpowiedzialny za powstanie fali akustycznej (struna, membrana, słup powietrza)</span></div>
+      <div class="data-row"><span class="data-label">Emiter</span><span class="data-val">Przenosi dźwięk do ośrodka wzmocnienia (pudło rezonansowe, dzwon)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Dynamika, Barwa, Widmo, Transjent, Formant</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box theory">
+        <div class="data-row"><span class="data-label">Dynamika</span><span class="data-val">Wyrażona w dB. Różnica poziomów między najcichszym a najgłośniejszym dźwiękiem możliwym do wydobycia z instrumentu. Zależna od rejestru.</span></div>
+        <div class="data-row"><span class="data-label">Stopnie dyn.</span><span class="data-val">pp, p, mp, mf, f, ff – muzyczna miara głośności, nie przekłada się wprost na dB</span></div>
+      </div>
+      <div class="info-box theory">
+        <div class="data-row"><span class="data-label">Barwa</span><span class="data-val">Cecha dźwięku pozwalająca jakościowo porównać dwa dźwięki o tej samej wysokości, głośności i czasie trwania</span></div>
+        <div class="data-row"><span class="data-label">Formant</span><span class="data-val">1) Uwypuklenie pewnej części pasma w widmie – pozwala odróżnić dwa takie same instrumenty/głosy od siebie<br>2) W głosie ludzkim: specyficzne rozmieszczenie formantów pozwala rozróżniać samogłoski</span></div>
+        <div class="data-row"><span class="data-label">Transjent</span><span class="data-val">Wysokoczęstotliwościowy, krótki sygnał (stan nieustalony) na początku (i czasem końcu) dźwięku. Umożliwia: <strong>poprawną identyfikację źródła</strong> i jego barwy + <strong>poprawną lokalizację</strong> (panorama, wysokość, dystans)</span></div>
+      </div>
+      <div class="important">Egzamin: im <strong>krótszy</strong> sygnał, tym <strong>szersze</strong> jego widmo!</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Promieniowanie kierunkowe</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px">Główne kierunki promieniowania = kierunki, dla których poziom dźwięku promieniowanego przez instrument <strong>nie spada poniżej 3 dB</strong> (ew. 10 dB). Pomiar dla umownej odległości 3 m.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Struna – właściwości fizyczne (Chordofony)</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <p style="font-size:14px; margin-bottom: 8px"><strong>Struna</strong> – ciało naturalnie wiotkie, którego kolisty przekrój jest tak mały w stosunku do długości, że drgania rozchodzą się tylko w jednym kierunku. Sprężystość uzyskiwana przez <strong>naciąg</strong>.</p>
+        <div class="data-row"><span class="data-label">Drgania harmoniczne</span><span class="data-val">Struna z natury drga harmonicznie → wieloton harmoniczny (alikwoty, których częstotliwość jest wielokrotnością składowej podstawowej)</span></div>
+        <hr>
+        <p style="font-size:13px; color: var(--muted); margin-bottom:6px">Przyczyny nieharmoniczności w praktyce:</p>
+        <ul class="normal"><li>Niejednorodność struny</li><li>Sztywność struny</li><li>Drgania wzdłużne</li></ul>
+        <hr>
+        <p style="font-size:13px; color: var(--muted); margin-bottom:6px">Przeciwdziałanie:</p>
+        <ul class="normal"><li>Długie i cienkie struny</li><li>Zwiększenie naciągu</li><li>Stosowanie owijki</li></ul>
+        <hr>
+        <p style="font-size:13px; color: var(--muted); margin-bottom:6px">Częstotliwość drgania struny zależy od:</p>
+        <ul class="normal"><li>Długości (im krótsza → wyższy dźwięk)</li><li>Naciągu (im większy → wyższy dźwięk)</li><li>Grubości / masy (im cieńsza → wyższy dźwięk)</li><li>Owijki</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ CHORDOFONY ═══════════════════════════════════════════ -->
+  <div id="chordo" class="section-header">
+    <div class="dot" style="background: var(--chord)"></div>
+    <h2>Chordofony – Instrumenty strunowe</h2>
+    <span class="badge" style="background: var(--chord-bg); color: var(--chord)">Strunowe</span>
+  </div>
+
+  <!-- SMYCZKOWE -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Skrzypce</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Smyczkowe</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div class="info-box chord">
+            <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">g – c5</span></div>
+            <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Kwinty (G, D, A, E)</span></div>
+            <div class="data-row"><span class="data-label">Charakter</span><span class="data-val">Najmniejszy i najwyższy instrument smyczkowy</span></div>
+            <div class="data-row"><span class="data-label">Sposoby gry</span><span class="data-val">arco (smyczek), col legno (drzewcem), pizzicato (szarpanie)</span></div>
+            <div class="data-row"><span class="data-label">Ważne</span><span class="data-val">Otwory rezonansowe = „efe" (F). Dusza pod mostkiem – nie klejona, trzyma naprężenie pudła</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="info-box mic">
+            <div class="mic-header">Mikrofonizacja</div>
+            <ul class="mic-list">
+              <li><strong>DPA 4099</strong> – clip-on, Supercardioid, 20–20 000 Hz. Świetnie zbiera instrument ale też hałasy otoczenia</li>
+              <li><strong>Audio-Technica ATM350 / ATM35</strong> – clip-on</li>
+              <li><strong>Neumann MCM 114</strong> – clip-on, mała membrana</li>
+              <li><strong>AKG C411</strong> – pickup przyklejany do instrumentu</li>
+            </ul>
+            <div class="mic-note">Mikrofon ustawiamy na „efe" jeśli chcemy ciepłe, rezonansowe brzmienie; na struny jeśli chcemy bardziej suchy, wyrazisty dźwięk. Używamy mikrofonu omnidirektywnego – brak efektu bliskości!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Altówka</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Smyczkowe</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">c – a3</span></div>
+        <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Kwinty (C, G, D, A)</span></div>
+        <div class="data-row"><span class="data-label">Barwa</span><span class="data-val">Bardziej nosowa niż skrzypce (inne proporcje pudła)</span></div>
+        <div class="data-row"><span class="data-label">Budowa</span><span class="data-val">Brak znaczących różnic w stosunku do skrzypiec poza rozmiarem</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <p style="font-size:14px">Te same zasady co skrzypce: DPA 4099, ATM350. Omni – brak efektu bliskości.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Wiolonczela</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Smyczkowe</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">C – a2</span></div>
+        <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Kwinty (C, G, D, A)</span></div>
+        <div class="data-row"><span class="data-label">Pozycja</span><span class="data-val">Grana pionowo między nogami, stosowanie pół pozycji</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Neumann MCM 114</strong> – Cardioid, 20–20 000 Hz</li>
+          <li><strong>Neumann MCM KX 14</strong> – Cardioid</li>
+          <li><strong>Audix ADX 20</strong> – i-p, Cardioid, 20–20 000 Hz</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Kontrabas</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Smyczkowe</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">E1 – g1</span></div>
+        <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Kwarty (E, A, D, G) – jako jedyny smyczkowy strojony kwartami!</span></div>
+        <div class="data-row"><span class="data-label">5 struna</span><span class="data-val">Czasem C1 lub H2</span></div>
+        <div class="data-row"><span class="data-label">Pozycja</span><span class="data-val">Pół pozycji i pozycje kciukowe</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <p style="font-size:14px">Te same mikrofony co wiolonczela: MCM 114, MCM KX 14, Audix ADX 20.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Kolejność smyczkowych od najniższego do najwyższego</h3>
+      <div class="tags"><span class="tag" style="background:var(--exam-bg);color:var(--exam)">EGZAMIN</span></div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box exam">
+        <p style="font-size:16px; font-weight: 700; letter-spacing: 1px;">Kontrabas → Wiolonczela → Altówka → Skrzypce</p>
+        <p style="font-size:13px; color: var(--muted); margin-top:8px">E1–g1 &nbsp;→&nbsp; C–a2 &nbsp;→&nbsp; c–a3 &nbsp;→&nbsp; g–c5</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Ustawienie orkiestry smyczkowej</h3>
+      <div class="tags"><span class="tag" style="background:var(--exam-bg);color:var(--exam)">EGZAMIN – narysuj</span></div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <p style="font-size:14px; margin-bottom:10px">3 typy ustawień orkiestry:</p>
+        <table>
+          <tr><th>Typ</th><th>Opis</th></tr>
+          <tr><td>Amerykańskie</td><td>I skrzypce po lewej, II skrzypce po prawej dyrygenta, kontrabasom z tyłu</td></tr>
+          <tr><td>Furtwängler</td><td>I skrzypce po lewej, II skrzypce po prawej, kontrabasy z tyłu po prawej</td></tr>
+          <tr><td>Europejskie</td><td>I skrzypce po lewej, altówki w centrum, wiolonczele po prawej</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Gitara akustyczna / elektryczna / basowa</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Strunowe</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <p style="font-size:13px; font-weight:700; color:var(--muted); margin-bottom:6px">GITARA AKUSTYCZNA</p>
+        <div class="data-row"><span class="data-label">Uwaga</span><span class="data-val">Pamiętać, że na gitarze może grać też prawa ręka (szarpanie strun przy efektach)</span></div>
+      </div>
+      <div class="info-box mic" style="margin-top:8px">
+        <div class="mic-header">Gitara akustyczna</div>
+        <ul class="mic-list">
+          <li><strong>Sennheiser E 914</strong> – Condenser, Cardioid, 20–20 000 Hz, mała membrana</li>
+          <li><strong>Neumann TLM 107</strong> – Cardioid, Large diaphragm</li>
+          <li><strong>Audio-Technica ATM 490</strong> – mała membrana</li>
+          <li>+ mikrofony overhead</li>
+        </ul>
+      </div>
+      <div class="info-box chord" style="margin-top:8px">
+        <p style="font-size:13px; font-weight:700; color:var(--muted); margin-bottom:6px">GITARA ELEKTRYCZNA</p>
+        <div class="data-row"><span class="data-label">Uwaga</span><span class="data-val">Bardzo rzadko pudło jest otwarte – mikrofon do głośnika (kolumny)</span></div>
+      </div>
+      <div class="info-box mic" style="margin-top:8px">
+        <div class="mic-header">Gitara elektryczna (do kolumny)</div>
+        <ul class="mic-list">
+          <li><strong>Lewitt LCT 441 FLEX</strong> – Condenser, Zmienna charakterystyka</li>
+          <li><strong>Sennheiser E 906</strong> – Dynamic, Supercardioid, 40 Hz–18 kHz</li>
+          <li><strong>Sennheiser E x609</strong> – Dynamic, Super-cardioid</li>
+          <li><strong>Electro-Voice RE320</strong> – Dynamic, Cardioid</li>
+          <li><strong>Beyerdynamic M88TG</strong> – Dynamic, Hypercardioid</li>
+          <li><strong>Beyerdynamic M160</strong> – Ribbon, Hyper cardioid</li>
+          <li><strong>Shure SM57</strong> – Dynamic, Cardioid</li>
+          <li><strong>Audix i-9</strong> – Dynamic, Cardioid</li>
+          <li><strong>Sennheiser MD-421 MKII</strong> – Dynamic, Cardioid</li>
+          <li><strong>Neumann U47 FET</strong> – Condenser, Cardioid</li>
+        </ul>
+      </div>
+      <div class="info-box chord" style="margin-top:8px">
+        <p style="font-size:13px; font-weight:700; color:var(--muted); margin-bottom:6px">GITARA BASOWA</p>
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val">H1 – g2 (zależy od konstrukcji)</span></div>
+        <div class="data-row"><span class="data-label">Struny</span><span class="data-val">4 do kilkunastu</span></div>
+        <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Jak kontrabas (kwarty)</span></div>
+        <div class="data-row"><span class="data-label">Electro-akustyk</span><span class="data-val">Volume na gitarze rozkręcony na pełny!</span></div>
+      </div>
+      <div class="info-box mic" style="margin-top:8px">
+        <div class="mic-header">Gitara basowa (kick mics)</div>
+        <p style="font-size:14px">AKG D112, AKG P2, Shure BETA 52A, Electro-Voice RE20, Audix D6, Sennheiser MD-421 MKI, Sennheiser E902, Beyerdynamic M88TG</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Harfa</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Szarpane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <div class="data-row"><span class="data-label">Struny</span><span class="data-val hl">46 strun strojonych w gamie Ces-dur</span></div>
+        <div class="data-row"><span class="data-label">Pedały</span><span class="data-val hl-y">7 pedałów – każdy zmienia wysokość jednego kompletu strun</span></div>
+        <div class="data-row"><span class="data-label">Dynamika</span><span class="data-val">Niewielka</span></div>
+        <div class="data-row"><span class="data-label">Widmo</span><span class="data-val">Zmienia się w zależności od sposobu wydobycia dźwięku</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>DPA 4011</strong> – Cardioid (clip-on)</li>
+          <li><strong>Rode NT5, Rode NKT1</strong> – Cardioid</li>
+          <li><strong>Neumann TLM 102, Neumann TLM 103</strong> – Cardioid</li>
+          <li><strong>AKG C 414</strong> – Zmienna charakterystyka (condenser)</li>
+          <li><strong>AKG C 214</strong> – Cardioid (condenser)</li>
+          <li><strong>Sennheiser MKE 2</strong> – Zmienna charakterystyka</li>
+          <li><strong>Royer R-121, Royer R-10</strong> – Ribbon, Figure 8</li>
+          <li><strong>Coles 4038</strong> – Ribbon</li>
+          <li><strong>sE Electronics VR1</strong></li>
+          <li><strong>Audio-Technica ATM 35G</strong> – Cardioid clip-on</li>
+          <li><strong>Audix Micro-HP</strong> – Cardioid, 40–20 000 Hz</li>
+          <li>Opcjonalnie: <strong>AKG C411 PF</strong> – Contact condenser (podklejany)</li>
+        </ul>
+        <div class="mic-note">Opcje ustawienia: 2 kondensatory z obu stron, 1 kondensator z bliska od strony muzyka, 1 z daleka</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Fortepian</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--chord-bg);color:var(--chord)">Uderzane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box chord">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">A2 – c5 (88 klawiszy)</span></div>
+        <div class="data-row"><span class="data-label">Charakter</span><span class="data-val">Największy instrument strunowy. Ogromna skala = ogromne widmo</span></div>
+        <div class="data-row"><span class="data-label">Pedał prawy</span><span class="data-val">Wydłuża dźwięk (tłumiki uniesione)</span></div>
+        <div class="data-row"><span class="data-label">Pedał środkowy</span><span class="data-val">Sostenuto – trzyma wybrany akord, reszta tłumiona</span></div>
+        <div class="data-row"><span class="data-label">Pedał lewy</span><span class="data-val">Una corda – przesuwa młoteczek (uderza w 1–2 zamiast 3 strun)</span></div>
+        <div class="data-row"><span class="data-label">Uwaga</span><span class="data-val">Pedały = mechanika → mikrofony mogą łapać odgłosy mechanicznych części!</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Zdecydowanie najlepiej</strong>: celować mikrofonami w klapę (przy pełnym otwarciu = 45°)</li>
+          <li><strong>AB – 2× Cardioid</strong>: wysoko struny (ORTF) + nisko struny</li>
+          <li><strong>AB – 2× Supercardioid</strong> (clip-on)</li>
+          <li><strong>Figure 8</strong>: Shure KSM44A Cardioid + Sennheiser MK4</li>
+          <li><strong>Blüthlein – 2× Figure 8</strong></li>
+          <li><strong>Mid/Side</strong>: Cardioid + Figure 8</li>
+          <li><strong>Przy zamkniętej klapie</strong>: DPA clip-on podklejone do klapy</li>
+        </ul>
+        <div class="mic-note">Poziom otwarcia klapy decyduje o formie mikrofonowania i natężeniu dźwięku.</div>
+        <hr style="margin: 10px 0">
+        <p style="font-size:13px; color:var(--muted)">Konkretne modele: <strong>Rode NT55, Beyerdynamic MC-930, Schoeps MK 4, Neumann KM184</strong></p>
+        <p style="font-size:13px; color:var(--muted)">Ribbon: <strong>sE Electronics VR1, Royer R-10</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ AEROFONY ═══════════════════════════════════════════ -->
+  <div id="aero" class="section-header">
+    <div class="dot" style="background: var(--aero)"></div>
+    <h2>Aerofony – Instrumenty dęte</h2>
+    <span class="badge" style="background: var(--aero-bg); color: var(--aero)">Dęte</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Podział dętych</h3>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Kategoria</th><th>Wibrator</th><th>Instrumenty</th></tr>
+        <tr><td>Wargowe (ustnikowe)</td><td>Usta/wargi muzyka</td><td>Trąbka, puzon, tuba, waltornia</td></tr>
+        <tr><td>Pojedyńczo-stroikowe</td><td>Jeden stroik (trzcinowy)</td><td>Klarnet, saksofon</td></tr>
+        <tr><td>Podwójno-stroikowe</td><td>Dwa stroiki</td><td>Obój, fagot, rożek angielski</td></tr>
+        <tr><td>Wargowe drewniane</td><td>Krawędź otworu</td><td>Flet poprzeczny</td></tr>
+        <tr><td>Samobrzmące dęte</td><td>Języczki metalowe</td><td>Harmonijka, akordeon, organy</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Flet poprzeczny (+ Pikkolina)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte drewniane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">c1 – c4</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Piszczałka otwarta wargowa</span></div>
+        <div class="data-row"><span class="data-label">Partytura</span><span class="data-val">Pierwszy instrument w partyturze</span></div>
+        <div class="data-row"><span class="data-label">Budowa</span><span class="data-val">Drewno lub metal. Eliptyczny otwór wlotowy. 3 części: główka, część środkowa, stopa</span></div>
+        <div class="data-row"><span class="data-label">Odmiana</span><span class="data-val">Piccolo (pikkolina) – o oktawę wyżej</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li>Ustawiamy tam gdzie powstaje dźwięk – <strong>przy ustnik (otwór wlotowy)</strong></li>
+          <li><strong>DPA 4099</strong> – Supercardioid, clip-on</li>
+          <li><strong>Audio-Technica ATM350</strong> – clip-on Cardioid</li>
+          <li><strong>Audio-Technica 4051B</strong> – Cardioid</li>
+          <li><strong>AKG C 451B</strong> – Cardioid</li>
+          <li><strong>Neumann KK 14, Audix ADX 10</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Klarnet (+ Klarnet basowy, Rożek angielski)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte drewniane</span>
+        <span class="tag" style="background:var(--exam-bg);color:var(--exam)">EGZAMIN</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">e – c4</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Otwarta piszczałka pojedyńczo-stroikowa (zachowuje się jak zamknięta)</span></div>
+        <div class="data-row"><span class="data-label">Transpozycja</span><span class="data-val hl-y">Instrument transponujący: <strong>in B</strong> (najpopularniejszy), <strong>in A</strong>, C, Es, D</span></div>
+        <div class="data-row"><span class="data-label">Budowa</span><span class="data-val">Drewno, nawiercone otwory + system klap</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja klarnetu – zasady</div>
+        <ul class="mic-list">
+          <li><strong>Najlepiej: z kija + z wylotu</strong> (2 mikrofony)</li>
+          <li>Jeśli tylko 1 mikrofon: <strong>z kija</strong> (środek instrumentu)</li>
+          <li><strong>Nigdy nie łap ustnika!</strong></li>
+          <li><strong>Nigdy nie dawaj mikrofonu zbyt blisko</strong> – będzie łapał odgłosy klap</li>
+        </ul>
+        <ul class="mic-list" style="margin-top:10px">
+          <li><strong>AMT WS</strong> – 2 Cardioids (clip-on, specjalny system)</li>
+          <li><strong>DPA 4099</strong> – Cardioid, clip-on</li>
+          <li><strong>SE Electronics 2200a</strong> – Cardioid</li>
+          <li><strong>Audio-Technica AT4050</strong> – Cardioid, Omni, Figure 8</li>
+          <li><strong>Neumann KM184</strong> – Cardioid</li>
+        </ul>
+        <div class="mic-note">
+          <strong>Uzasadnienie na egzaminie:</strong><br>
+          — Koncert/live z instrumentem: DPA 4099 clip-on (montowany na instrumencie, muzyk się porusza, nie trzeba stojaka)<br>
+          — Studio nagraniowe: 2 mikrofony (kij + wylot), np. Neumann KM184 – klarnet gra całym ciałem, sam wylot nie oddaje pełnego brzmienia
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Obój (+ Rożek angielski)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Podwójno-stroikowy</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">h – a3</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Instrument podwójno-stroikowy</span></div>
+        <div class="data-row"><span class="data-label">Ważne</span><span class="data-val">Inne instrumenty strojone DO oboju – bo oboju ciężko rozstroić!</span></div>
+        <div class="data-row"><span class="data-label">Odmiana</span><span class="data-val">Rożek angielski</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li>Dokładnie tak samo jak klarnet – idealne: z kija</li>
+          <li><strong>Sennheiser MD 441-U</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Audio-Technica 4051B</strong> – Cardioid</li>
+          <li><strong>DPA 4011A</strong> – Cardioid</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Fagot (+ Kontrafagot)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Podwójno-stroikowy</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">B1 – fis2</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Piszczałka otwarta o długości 2,5 m, zwinięta dla wygody</span></div>
+        <div class="data-row"><span class="data-label">Gra</span><span class="data-val">Ciężki instrument, grany głównie na siedząco</span></div>
+        <div class="data-row"><span class="data-label">Dopełnienie</span><span class="data-val">Kontrafagot</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Nagłaśniamy na 2 mikrofony: kij + wylot</strong> – nie można zrezygnować z żadnego, gra całością!</li>
+          <li><strong>DPA 4099</strong> – Cardioid</li>
+          <li><strong>Schoeps MK4</strong> – Cardioid</li>
+          <li><strong>DPA 4011A</strong> – Cardioid</li>
+          <li><strong>Audio-Technica AT4047/SV/SM</strong> – 20–18 000 Hz</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Saksofon</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Pojedyńczo-stroikowy</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Odmiany</span><span class="data-val">Sopranowy mały, sopranowy, altowy, tenorowy, barytonowy, basowy</span></div>
+        <div class="data-row"><span class="data-label">Transpozycja</span><span class="data-val hl-y">in B (sopran, tenor) i in Es (alt, baryton)</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Instrument pojedyńczo-stroikowy</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Audio-Technica AT-4060</strong> – Cardioid, 20–20 000 Hz (do stojaka)</li>
+          <li><strong>Audio-Technica ATM350</strong> – Cardioid, clip-on</li>
+          <li><strong>Sennheiser E 906</strong> – Supercardioid, Dynamic</li>
+          <li><strong>Shure Beta 98A</strong> – Cardioid, clip-on</li>
+          <li><strong>Sennheiser 441, Neumann MCM 114</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Trąbka (+ Flugelhorn)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte blaszane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">fis – c3</span></div>
+        <div class="data-row"><span class="data-label">Transpozycja</span><span class="data-val hl-y">Najczęściej B, C, Es, A</span></div>
+        <div class="data-row"><span class="data-label">Wentyle</span><span class="data-val">System wentylowy – obniżanie o 1, 2 lub 3 półtony (łącznie do 6 półtonów)</span></div>
+        <div class="data-row"><span class="data-label">Uwaga</span><span class="data-val hl-r">Przy wylocie ~ 120 dB!</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Mikrofon tylko i wyłącznie przy wylocie</strong></li>
+          <li><strong>Audio-Technica ATM360</strong> – Cardioid, clip-on</li>
+          <li><strong>DPA 4099</strong> – Supercardioid, clip-on</li>
+          <li><strong>Shure Beta 98HC</strong> – Cardioid, 20 Hz–20 kHz</li>
+          <li><strong>Sennheiser 441, AKG C411, MD421</strong></li>
+          <li><strong>Shure SM57, EV RE20</strong> (do stojaka)</li>
+          <li><strong>Beyerdynamic M 160</strong> – Ribbon (do stojaka)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Puzon</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte blaszane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">B1 – c2</span></div>
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Instrument dęty blaszany. Z reguły bez wentyli – zamiast nich <strong>suwak</strong> (możliwość płynnych glissand!)</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <p style="font-size:14px"><strong>Identycznie jak trąbka</strong> – mikrofon przy wylocie. Te same modele.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Tuba</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte blaszane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">A2 – a1</span></div>
+        <div class="data-row"><span class="data-label">Charakter</span><span class="data-val">Największy instrument w sekcji dętej blaszanej. 3 do 6 wentyli.</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Mikrofon do stopy (czary)</strong></li>
+          <li>Jeśli pojemnościowy: <strong>duża membrana</strong>, w ¾ odległości od pierścienia czary</li>
+          <li><strong>DPA 4099, Shure Beta 98HC, Audio-Technica ATM 350</strong> (clip-on)</li>
+          <li><strong>EV RE20, Neumann TLM 103, AKG D121</strong> (do stojaka)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Waltornia</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--aero-bg);color:var(--aero)">Dęte blaszane</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box aero">
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val hl">B1 – f2</span></div>
+        <div class="data-row"><span class="data-label">Transpozycja</span><span class="data-val">Instrument transponujący, prawie każda tonacja. Brak znaków przykluczowych.</span></div>
+        <div class="data-row"><span class="data-label">Charakter</span><span class="data-val">Jeden z najtrudniejszych instrumentów do opanowania</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <p style="font-size:14px"><strong>Mikrofon przy wylocie</strong> (czara zwrócona ku tyłowi/dołowi)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Instrumenty transponujące – zestawienie</h3>
+      <div class="tags"><span class="tag" style="background:var(--exam-bg);color:var(--exam)">EGZAMIN</span></div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="important">Egzamin: jakie znasz instrumenty transponujące?</div>
+      <table>
+        <tr><th>Instrument</th><th>Transpozycja</th></tr>
+        <tr><td>Klarnet</td><td><span class="hl-y">B, A</span> (najczęściej), C, Es, D</td></tr>
+        <tr><td>Saksofon sopranowy / tenorowy</td><td><span class="hl-y">B</span></td></tr>
+        <tr><td>Saksofon altowy / barytonowy</td><td><span class="hl-y">Es</span></td></tr>
+        <tr><td>Trąbka</td><td><span class="hl-y">B</span> (najczęściej), C, Es, A</td></tr>
+        <tr><td>Waltornia</td><td>Prawie każda tonacja (najczęściej F)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ IDIOFONY ═══════════════════════════════════════════ -->
+  <div id="idio" class="section-header">
+    <div class="dot" style="background: var(--idio)"></div>
+    <h2>Idiofony – Instrumenty samobrzmiące</h2>
+    <span class="badge" style="background: var(--idio-bg); color: var(--idio)">Idiofony</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Marimba, Ksylofon, Wibrafon</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--idio-bg);color:var(--idio)">Idiofony sztabkowe</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div class="info-box idio">
+            <p style="font-size:13px; font-weight:700; color:var(--idio); margin-bottom:6px">MARIMBA</p>
+            <ul class="normal">
+              <li>Sztabki drewniane</li>
+              <li>Metalowe rury rezonujące</li>
+              <li>Dość nieharmoniczne brzmienie</li>
+              <li>Duża skala, duże rozmiary sztab</li>
+            </ul>
+          </div>
+          <div class="info-box idio" style="margin-top:8px">
+            <p style="font-size:13px; font-weight:700; color:var(--idio); margin-bottom:6px">KSYLOFON</p>
+            <ul class="normal">
+              <li>Bardzo szybko znikający dźwięk</li>
+              <li>Najszybszy atak ze wszystkich instrumentów!</li>
+              <li>Mniejsze sztabki = bardziej wirtuozerski</li>
+            </ul>
+          </div>
+          <div class="info-box idio" style="margin-top:8px">
+            <p style="font-size:13px; font-weight:700; color:var(--idio); margin-bottom:6px">WIBRAFON</p>
+            <ul class="normal">
+              <li>Sztabki metalowe + metalowe rury</li>
+              <li>Dźwięk długo wybrzmiewający, dość czysty</li>
+              <li>Technika pedalizacji (tłumienia)</li>
+              <li>Silnik kręcący łopatkami = efekt wibracji</li>
+              <li>Słupki jednostronnie utwierdzone</li>
+              <li>Instrument wirtuozowski</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="info-box mic">
+            <div class="mic-header">Mikrofonizacja (Marimba/Ksylofon/Wibrafon)</div>
+            <ul class="mic-list">
+              <li>Najlepiej <strong>wielomembranowo</strong> (AB mics)</li>
+              <li>Mikrofon <strong>z góry albo pod kątem</strong></li>
+              <li><strong>Nie na podłodze!</strong> (zbiera kroki)</li>
+              <li><strong>Lewitt LCT 140</strong></li>
+              <li><strong>Lewitt LCT 040</strong></li>
+              <li><strong>AKG P 170</strong></li>
+              <li><strong>Shure SM 81</strong></li>
+              <li><strong>Shure KSM 137</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Harmonijka ustna</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--idio-bg);color:var(--idio)">Idiofon dęty</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box idio">
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Idiofon dęty. Element drgający: języczki pobudzane przez przepływ powietrza</span></div>
+        <div class="data-row"><span class="data-label">Odmiany</span><span class="data-val">Diatoniczna i chromatyczna</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Specjalny mikrofon do harmonijki</strong> lub <strong>Shure SM58</strong> (ważne by była duża gałka/kula – trzyma się razem z mikrofonem)</li>
+          <li><strong>Shure 520DX</strong> – Dynamic, Omni, 100 Hz–5 kHz (klasyczny „green bullet")</li>
+          <li><strong>Shure SM57</strong> – Cardioid</li>
+          <li><strong>Audix i5</strong> – Cardioid</li>
+          <li>Uwaga: <strong>pojemnościowe NIE</strong> – za dużo wiatru/podmuchów</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Akordeon</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--idio-bg);color:var(--idio)">Idiofon dęty</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box idio">
+        <div class="data-row"><span class="data-label">Typ</span><span class="data-val">Instrument samobrzmiący dęty. Ruch miecha wytwarza przepływ powietrza</span></div>
+        <div class="data-row"><span class="data-label">Registratury</span><span class="data-val">Zestawy blaszek – różne brzmienia przez wybór registratur</span></div>
+        <div class="data-row"><span class="data-label">Wersje</span><span class="data-val">Klawiszowy i guzikowy</span></div>
+        <div class="data-row"><span class="data-label">Skala</span><span class="data-val">Różna, ale zbliżona do fortepianu</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Idealnie: 4 mikrofony</strong> (2 lewo + 2 prawo)</li>
+          <li>Minimum 2 mikrofony (ale bez panoramy)</li>
+          <li>Dźwięki niskie: po lewej stronie</li>
+          <li>Dźwięki wysokie: po prawej stronie</li>
+          <li><strong>DPA 4099</strong> – Cardioid</li>
+          <li><strong>Shure KSM137</strong> – Cardioid</li>
+          <li><strong>Shure SM81</strong> – Cardioid</li>
+          <li><strong>Shure MX183</strong> – Omni (lavalier)</li>
+          <li><strong>Sennheiser MKE 2</strong> – Omni</li>
+          <li><strong>DPA 4060</strong> – Omni</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Organy / Hammond / Leslie</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--idio-bg);color:var(--idio)">Idiofony dęte</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box idio">
+        <div class="data-row"><span class="data-label">Organy</span><span class="data-val">Największy instrument muzyczny</span></div>
+        <div class="data-row"><span class="data-label">Hammond</span><span class="data-val">Organy elektryczne, charakterystyczny wirujący głośnik Leslie – zmienia barwę przez obrót rotora</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja organów piszczałkowych</div>
+        <p style="font-size:14px">Bierzemy cały instrument, czyli też pomieszczenie (dalekie ustawienie mikrofonów)</p>
+        <div class="mic-header" style="margin-top:12px">Mikrofonizacja Hammonda (Leslie)</div>
+        <ul class="mic-list">
+          <li><strong>AB Stereo</strong>: Sennheiser E906 / Shure SM57 / Shure SM7</li>
+          <li><strong>XY, MID-SIDE, AB</strong></li>
+          <li><strong>ORTF, XY (Cardioid)</strong></li>
+          <li><strong>DPA MKS (Cardioid)</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ MEMBRANOFONY ═══════════════════════════════════════════ -->
+  <div id="membr" class="section-header">
+    <div class="dot" style="background: var(--membr)"></div>
+    <h2>Membranofony + Perkusja</h2>
+    <span class="badge" style="background: var(--membr-bg); color: var(--membr)">Perkusja</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Bęben basowy (Stopa / Kick)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Membranofon</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box membr">
+        <div class="data-row"><span class="data-label">Uwaga</span><span class="data-val hl-r">Sub Kick – uwaga na bardzo niskie częstotliwości (5 Hz też może być tam!)</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Kick IN (do dziury w naciągu)</div>
+        <ul class="mic-list">
+          <li><strong>Audix D6</strong> – Dynamic, Cardioid, 30 Hz–15 kHz, duża membrana</li>
+          <li><strong>AKG D112 MKII</strong> – Dynamic, Cardioid, 20–17 kHz</li>
+          <li><strong>AKG D12 VR</strong> – Dynamic, Cardioid, 17 Hz–17 kHz</li>
+          <li><strong>AKG P2</strong> – Dynamic, Cardioid, 20–16 000 Hz</li>
+          <li><strong>Shure Beta 52A</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Sennheiser E 902</strong> – Dynamic, Cardioid</li>
+          <li><strong>Sennheiser E 602 II</strong> – Dynamic, Cardioid</li>
+        </ul>
+        <div class="mic-header" style="margin-top:12px">Kick OUT (przed bębnem, bez dziury)</div>
+        <ul class="mic-list">
+          <li><strong>Sennheiser MD-421 MKII</strong> – Dynamic, Cardioid, 30–17 kHz</li>
+          <li><strong>Beyerdynamic M88TG</strong> – Dynamic, Hypercardioid, 30–20 000 Hz</li>
+          <li><strong>Neumann U47 FET</strong> – Condenser, Cardioid, 40–16 kHz</li>
+          <li><strong>Shure KSM44A</strong> – Condenser, Cardioid/Omni/Fig-8</li>
+          <li><strong>Royer Labs R-121</strong> – Ribbon, Fig-8</li>
+          <li><strong>Coles 4038</strong> – Ribbon, Fig-8</li>
+        </ul>
+        <div class="mic-note">Bez dziury: Telefunken U47 (Neumann U47), Electro-Voice RE20, Sennheiser MD421 MK</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Werbel (Snare)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Membranofon</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box membr">
+        <div class="data-row"><span class="data-label">Strojenie</span><span class="data-val">Należy do zadań realizatora (Tunebot do strojenia)</span></div>
+        <div class="data-row"><span class="data-label">Sprężyny</span><span class="data-val">Zwracać uwagę na długość sprężyn (na ile są dokręcone) przy nagraniu</span></div>
+        <div class="data-row"><span class="data-label">Przesłuchy</span><span class="data-val">Konstruktywny i destruktywny</span></div>
+      </div>
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja (Top + Bottom)</div>
+        <ul class="mic-list">
+          <li><strong>Minimum 2 mikrofony</strong> (góra + dół)</li>
+          <li>Jazz: mikrofon pojemnościowy (zbieranie szorowania miotełek)</li>
+          <li><strong>Shure SM57</strong> – Dynamic, Cardioid, 40 Hz–15 kHz (klasyk)</li>
+          <li><strong>Sennheiser E 906</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Sennheiser E 604</strong> – Dynamic, Cardioid</li>
+          <li><strong>Shure Beta 57A</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Sennheiser MD-421 MKI</strong> – Dynamic, Cardioid</li>
+          <li><strong>Shure Beta 56A</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Audix i-5</strong> – Dynamic, Cardioid</li>
+          <li><strong>Neumann KM184</strong> – Condenser, Cardioid, mała membrana</li>
+          <li><strong>DPA 4099</strong> – Condenser, Supercardioid</li>
+          <li><strong>Shure Beta 98 AD/C</strong> – Condenser, Cardioid</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Tomy</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Membranofon</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li><strong>Sennheiser E604</strong> – Dynamic, Cardioid, 40 Hz–18 kHz</li>
+          <li><strong>Sennheiser E 904</strong> – Dynamic, Cardioid, 40–18 000 Hz</li>
+          <li><strong>Sennheiser MD-421 MKII</strong> – Dynamic, Cardioid</li>
+          <li><strong>Shure Beta 56A</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Shure PGA56</strong> – Dynamic, Cardioid</li>
+          <li><strong>Audix D2</strong> – Dynamic, Hypercardioid, 44–18 kHz</li>
+          <li><strong>Beyerdynamic M88TG</strong> – Dynamic, Hypercardioid</li>
+          <li><strong>Earthworks Audio DM20</strong> – Condenser, Cardioid, mała membrana</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Overheady i Hi-Hat</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Perkusja</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box mic">
+        <div class="mic-header">Overheady + Hi-Hat – zalecane mikrofony</div>
+        <ul class="mic-list">
+          <li><strong>Shure SM81</strong> – Condenser, Cardioid, 20–20 kHz, mała membrana</li>
+          <li><strong>AKG C214</strong> – Condenser, Cardioid, duża membrana</li>
+          <li><strong>Lewitt LCT 040</strong> – Condenser, 20–20 000 Hz</li>
+          <li><strong>Neumann KM184</strong> – Condenser, Cardioid, mała membrana</li>
+          <li><strong>Rode NT5</strong> – Condenser, Cardioid</li>
+          <li><strong>Sennheiser E 614</strong> – Dynamic, Supercardioid</li>
+          <li><strong>Sennheiser MKH 50</strong> – Condenser, Supercardioid</li>
+          <li><strong>Sennheiser E 914</strong> – Condenser, Cardioid</li>
+          <li><strong>AKG C1000s MKIV</strong> – Condenser, Cardioid/Hypercardioid</li>
+          <li><strong>AKG C 451B</strong> – Condenser, Cardioid</li>
+          <li><strong>Shure KSM 137</strong> – Cardioid</li>
+          <li><strong>Shure KSM 141</strong> – Cardioid, Omni</li>
+          <li><strong>AKG C414</strong> – Cardioid, Subcardioid, Omni, Figure 8</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Kotły (Timpani)</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Membranofon</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box mic">
+        <div class="mic-header">Mikrofonizacja</div>
+        <ul class="mic-list">
+          <li>Nagłaśnianie <strong>ósemkami</strong> – przy 4 kotłach: mikrofon pomiędzy 1–2 i drugi pomiędzy 3–4</li>
+          <li><strong>Neumann KK14</strong></li>
+          <li><strong>Audio-Technica ATM 35G</strong></li>
+          <li><strong>Warm Audio WA-47jr</strong></li>
+          <li><strong>SE Electronics VR1</strong>, <strong>Lewitt LCT 040</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <h3>Konga, Bonga, Cajon, DJembe</h3>
+      <div class="tags">
+        <span class="tag" style="background:var(--membr-bg);color:var(--membr)">Perkusja latynoska</span>
+        <span class="tag" style="background:var(--mic-bg);color:var(--mic)">Mikrofonizacja</span>
+      </div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="info-box mic">
+        <div class="mic-header">Bonga / Timbalesy</div>
+        <ul class="mic-list">
+          <li><strong>Shure SM57</strong> – Cardioid</li>
+          <li><strong>Sennheiser E904</strong> – Cardioid</li>
+        </ul>
+        <div class="mic-header" style="margin-top:12px">Konga</div>
+        <ul class="mic-list">
+          <li><strong>DPA 4099</strong> – Cardioid</li>
+          <li><strong>Shure Beta 58</strong>, <strong>Shure Beta 91</strong> – Supercardioid</li>
+        </ul>
+        <div class="mic-header" style="margin-top:12px">Cajon</div>
+        <ul class="mic-list">
+          <li><strong>Shure Beta 57A</strong> – Supercardioid</li>
+          <li><strong>Audix D2</strong> – Cardioid</li>
+          <li>+ sub-kick (Shure Beta 52A) do stopy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ EGZAMIN ═══════════════════════════════════════════ -->
+  <div id="egzamin" class="section-header">
+    <div class="dot" style="background: var(--exam)"></div>
+    <h2>Pytania Egzaminacyjne + Odpowiedzi</h2>
+    <span class="badge" style="background: var(--exam-bg); color: var(--exam)">Egzamin</span>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">Podział instrumentów według wibratora</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Chordofony</strong> – struna (skrzypce, gitara, fortepian)<br>
+        <strong>Aerofony</strong> – słup powietrza (flet, klarnet, trąbka)<br>
+        <strong>Membranofony</strong> – membrana (bęben, kotły, werbel)<br>
+        <strong>Idiofony</strong> – samo ciało instrumentu (marimba, wibrafon, akordeon)<br>
+        <strong>Elektrofony</strong> – prąd elektryczny (syntezatory)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">Im krótszy sygnał, tym … jego widmo?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        Im krótszy sygnał, tym <strong>szersze</strong> jego widmo.<br>
+        (Odwrotnie: im dłuższy sygnał → węższe widmo)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">Podaj dwa przykłady stopni dynamicznych</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>pp</strong> (pianissimo), <strong>p</strong> (piano), <strong>mp</strong> (mezzo piano), <strong>mf</strong> (mezzo forte), <strong>f</strong> (forte), <strong>ff</strong> (fortissimo)<br><br>
+        Muzyczna miara głośności, <em>nie przekłada się wprost na wartości w dB</em>.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">4</span>
+      <span class="q-text">Podaj 2 znaczenia formantu</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        1. <strong>Pozwala odróżnić dwa takie same instrumenty/głosy od siebie</strong> (uwypuklenie pasma w widmie, charakterystyczne dla danego instrumentu)<br><br>
+        2. <strong>W głosie ludzkim</strong>: specyficzne rozmieszczenie formantów pozwala rozróżniać samogłoski (powstają przez układ przestrzeni rezonansowych)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">5</span>
+      <span class="q-text">Jaki jest najwyższy instrument w orkiestrze symfonicznej?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Piccolo (pikkolina)</strong> – mała odmiana fletu, gra o oktawę wyżej niż flet (skala od c2 wzwyż)<br>
+        Spośród standardowych: <strong>Skrzypce</strong> (skala g – c5) są najwyższym instrumentem smyczkowym.<br>
+        W kategorii smyczkowych kolejność od najwyższego: skrzypce → altówka → wiolonczela → kontrabas.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">6</span>
+      <span class="q-text">Od czego zależy częstotliwość drgania struny?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Długość</strong> – im krótsza struna, tym wyższy dźwięk<br>
+        <strong>Naciąg</strong> – im większy naciąg, tym wyższy dźwięk<br>
+        <strong>Grubość/masa</strong> – im cieńsza struna, tym wyższy dźwięk<br>
+        <strong>Owijka</strong> – zmienia masę liniową struny
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">7</span>
+      <span class="q-text">Uszereguj instrumenty smyczkowe od najniższego do najwyższego</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Kontrabas</strong> (E1–g1) → <strong>Wiolonczela</strong> (C–a2) → <strong>Altówka</strong> (c–a3) → <strong>Skrzypce</strong> (g–c5)<br><br>
+        Kontrabas stroi się <em>kwartami</em>, pozostałe – <em>kwintami</em>.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">8</span>
+      <span class="q-text">Skrzypce stroją się …?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Kwintami</strong> – G, D, A, E<br>
+        Podobnie: altówka (C, G, D, A) i wiolonczela (C, G, D, A)<br>
+        Wyjątek: <strong>kontrabas strojony kwartami</strong> (E, A, D, G)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">9</span>
+      <span class="q-text">Ile pedałów ma harfa?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>7 pedałów</strong> – każdy pedał służy do zmiany wysokości dźwięku jednego kompletu strun (można ustawiać każdą strunę w 3 pozycjach: bes/b/bis)<br>
+        Harfa ma 46 strun strojonych w gamie Ces-dur.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">10</span>
+      <span class="q-text">Dwa przykłady instrumentów dętych pojedyńczo-stroikowych</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Klarnet</strong> i <strong>Saksofon</strong><br>
+        (Podwójno-stroikowe: fagot, obój)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">11</span>
+      <span class="q-text">Podaj 2 najpopularniejsze tonacje transpozycji klarnetu</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>B</strong> (najczęstszy – klarnet B) i <strong>A</strong><br>
+        Inne: C, Es, D
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">12</span>
+      <span class="q-text">Podaj przykładową mikrofonizację klarnetu z uzasadnieniem (sytuacja live vs studio)</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Live (muzyk się porusza):</strong><br>
+        → <strong>DPA 4099</strong> (Supercardioid, clip-on) – mikrofon mocowany bezpośrednio do instrumentu. Muzyk może się swobodnie poruszać, nie trzeba stojaka. Małe ryzyko sprzężenia. Ustawiamy przy kiju (środku) instrumentu.<br><br>
+        <strong>Studio nagraniowe:</strong><br>
+        → <strong>2 mikrofony: kij + wylot</strong>, np. Neumann KM184 (mała membrana, Cardioid) – klarnet gra całym ciałem, sam wylot nie oddaje pełnego brzmienia. Mikrofon z kija zbiera środkową część, z wylotu – rezonans i „ciało" dźwięku.<br><br>
+        <strong>Zasady:</strong><br>
+        ✗ Nigdy nie łap ustnika<br>
+        ✗ Nie dawaj mikrofonu zbyt blisko – łapie odgłosy klap
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">13</span>
+      <span class="q-text">Sposoby wydobycia dźwięku ze skrzypiec</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>arco</strong> – pocieranie smyczkiem (normalny sposób)<br>
+        <strong>col legno</strong> – uderzenie drzewcem smyczka<br>
+        <strong>pizzicato</strong> – szarpanie strun palcami
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">14</span>
+      <span class="q-text">Znaczenie transjenta</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        Transjent umożliwia:<br>
+        1. <strong>Poprawną identyfikację źródła</strong> (charakterystyczny atak dla każdego instrumentu) oraz jego barwy<br>
+        2. <strong>Poprawną lokalizację</strong> dźwięku we wszystkich 3 wymiarach (panorama, wysokość, dystans)
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">15</span>
+      <span class="q-text">Jakie instrumenty transponujące znasz?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Klarnet</strong> – in B (najczęściej), A, C, Es, D<br>
+        <strong>Saksofon sopranowy/tenorowy</strong> – in B<br>
+        <strong>Saksofon altowy/barytonowy</strong> – in Es<br>
+        <strong>Trąbka</strong> – in B (najczęściej), C, Es, A<br>
+        <strong>Waltornia</strong> – prawie każda tonacja
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">16</span>
+      <span class="q-text">Mikrofonizacja fortepianu – jak ustawić mikrofony?</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Klapa otwarta (45°):</strong> Zdecydowanie najlepszy sposób – celować mikrofonami w klapę<br>
+        → AB x2 Cardioid (ORTF): wysoko struny + nisko struny<br>
+        → AB x2 Supercardioid (clip-on)<br>
+        → Środek + Bok (Mid/Side): Cardioid + Figure 8<br><br>
+        <strong>Klapa zamknięta:</strong> Podklejamy powierzchniowe mikrofony DPA do klapy (AB Stereo)<br><br>
+        <strong>Uwaga:</strong> Pedały są mechaniką – mikrofony mogą łapać odgłosy! Natężenie dźwięku zależy od poziomu otwarcia klapy.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">17</span>
+      <span class="q-text">Narysuj układ orkiestry (Europejski / Furtwängler / Amerykański)</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <pre style="font-size:12px; line-height:1.4; font-family: monospace; color: #e2e8f0;">
+       SCENA / DYRYGENT (przodem do publiczności)
+       ────────────────────────────────────────
+EUROPEJSKI:
+  [I Skrzypce]  [Altówki]  [Wiolonczele]  [II Skrzypce]
+           [Kontrabasy z tyłu pośrodku]
+
+FURTWÄNGLER:
+  [I Skrzypce]  [II Skrzypce]  [Altówki]  [Wiolonczele]
+           [Kontrabasy z tyłu po prawej]
+
+AMERYKAŃSKI:
+  [I Skrzypce]  [Altówki]  [II Skrzypce]  [Wiolonczele]
+           [Kontrabasy z tyłu po lewej]
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header" onclick="toggleQ(this)">
+      <span class="q-num">18</span>
+      <span class="q-text">Mikrofonizacja tuby</span>
+    </div>
+    <div class="q-answer">
+      <div class="answer-box">
+        <strong>Mikrofon do stopy (czary)</strong><br>
+        Jeśli pojemnościowy: duża membrana, w ¾ odległości od pierścienia czary<br>
+        Modele: DPA 4099, Shure Beta 98HC (clip-on); EV RE20, Neumann TLM 103, AKG D121 (do stojaka)
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function toggleQ(header) {
+  const answer = header.nextElementSibling;
+  answer.classList.toggle('open');
+}
+
+// Open all cards on load for easy scrolling, close by default except first few
+document.addEventListener('DOMContentLoaded', () => {
+  // Close all card bodies by default (they start closed via CSS)
+  // Questions start closed too
+});
+</script>
+</body>
+</html>
