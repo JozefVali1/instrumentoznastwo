@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Fiszki Egzaminacyjne – PM & IW</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0F0F11;
+  --surface: #1A1A1E;
+  --surface2: #222228;
+  --border: #2E2E36;
+  --border2: #3A3A44;
+  --text: #F0F0F4;
+  --text2: #9090A0;
+  --text3: #5A5A6A;
+  --accent-pm: #4E8EF7;
+  --accent-iw: #3DCB7D;
+  --accent-pm-bg: rgba(78,142,247,0.12);
+  --accent-iw-bg: rgba(61,203,125,0.12);
+  --red: #F25A5A;
+  --orange: #F2A43A;
+  --green: #3DCB7D;
+  --teal: #2DD4BF;
+  --pill-new-bg: rgba(78,142,247,0.15);
+  --pill-new-c: #7EB5FF;
+  --pill-weak-bg: rgba(242,90,90,0.15);
+  --pill-weak-c: #F08080;
+  --pill-ok-bg: rgba(242,164,58,0.15);
+  --pill-ok-c: #F2C060;
+  --pill-done-bg: rgba(61,203,125,0.15);
+  --pill-done-c: #3DCB7D;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 50px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overscroll-behavior: none;
+}
+
+body { padding: 0 0 env(safe-area-inset-bottom) 0; }
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1rem 5rem;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 1.25rem 0 1rem;
+}
+.header-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: .25rem;
+}
+.header-sub {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* SECTIONS */
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: .5rem;
+  padding-left: 2px;
+}
+.section { margin-bottom: 1rem; }
+
+/* BUTTON GROUPS */
+.btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.subj-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  transition: all .15s;
+  text-align: center;
+}
+.subj-btn.active-PM {
+  background: var(--accent-pm-bg);
+  border-color: var(--accent-pm);
+  color: var(--accent-pm);
+}
+.subj-btn.active-IW {
+  background: var(--accent-iw-bg);
+  border-color: var(--accent-iw);
+  color: var(--accent-iw);
+}
+.subj-btn.active-ALL {
+  background: rgba(240,240,244,0.08);
+  border-color: var(--text2);
+  color: var(--text);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 9px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  transition: all .15s;
+  text-align: center;
+}
+.mode-btn.active {
+  background: rgba(78,142,247,0.15);
+  border-color: var(--accent-pm);
+  color: var(--accent-pm);
+}
+
+.f-btn {
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  transition: all .15s;
+  white-space: nowrap;
+}
+.f-btn.fa { border-color: var(--text2); color: var(--text); background: var(--surface2); }
+.f-btn.fn { border-color: var(--accent-pm); color: var(--pill-new-c); background: var(--pill-new-bg); }
+.f-btn.fw { border-color: var(--red); color: var(--pill-weak-c); background: var(--pill-weak-bg); }
+.f-btn.fo { border-color: var(--orange); color: var(--pill-ok-c); background: var(--pill-ok-bg); }
+.f-btn.fd { border-color: var(--green); color: var(--pill-done-c); background: var(--pill-done-bg); }
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: .6rem .85rem;
+  margin-bottom: 1rem;
+}
+.pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  font-family: 'DM Mono', monospace;
+}
+.pn { background: var(--pill-new-bg); color: var(--pill-new-c); }
+.pw { background: var(--pill-weak-bg); color: var(--pill-weak-c); }
+.po { background: var(--pill-ok-bg); color: var(--pill-ok-c); }
+.pd { background: var(--pill-done-bg); color: var(--pill-done-c); }
+.reset-btn {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  padding: 2px 0;
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+  background: var(--border);
+  border-radius: 4px;
+  height: 3px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-pm), var(--accent-iw));
+  border-radius: 4px;
+  transition: width .4s ease;
+}
+
+/* CARD */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.card-top { padding: 1.1rem 1.2rem .9rem; }
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .75rem;
+}
+.card-left { display: flex; gap: 6px; align-items: center; }
+.card-num {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.card-subj {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid;
+  letter-spacing: .04em;
+}
+.subj-PM { background: var(--accent-pm-bg); color: var(--accent-pm); border-color: var(--accent-pm); }
+.subj-IW { background: var(--accent-iw-bg); color: var(--accent-iw); border-color: var(--accent-iw); }
+.card-score {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.card-q {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* DIVIDER & HINT */
+.card-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+.card-hint {
+  padding: .75rem 1.2rem;
+  font-size: 12px;
+  color: var(--text3);
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border-top: 1px dashed var(--border2);
+}
+
+/* ANSWER */
+.card-answer {
+  padding: 1.1rem 1.2rem;
+  border-top: 1px solid var(--border2);
+  background: var(--surface2);
+}
+.ans-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: .4rem;
+}
+.ans-min {
+  font-size: 13px;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.6;
+  padding: .65rem .85rem;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-pm);
+  margin-bottom: 1rem;
+}
+.ans-long {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.75;
+}
+.ans-long strong { color: var(--text); font-weight: 600; }
+
+/* GRADE */
+.grade-area {
+  padding: .85rem 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.grade-label {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-bottom: .6rem;
+}
+.grade-row { display: flex; gap: 6px; }
+.g-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  border: 1.5px solid;
+  background: transparent;
+  text-align: center;
+  transition: opacity .1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.g-btn:active { opacity: .7; }
+.g0 { border-color: var(--red); color: var(--red); }
+.g1 { border-color: var(--orange); color: var(--orange); }
+.g2 { border-color: var(--green); color: var(--green); }
+.g3 { border-color: var(--teal); color: var(--teal); }
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+.nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-btn:active { background: var(--surface2); }
+
+.dice-wrap { display: flex; gap: 6px; align-items: center; }
+.dice-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  font-size: 28px;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .12s, background .12s;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+.dice-btn:active { transform: scale(.86) rotate(20deg); }
+.dice-btn.rolling { animation: diceroll .6s linear; }
+@keyframes diceroll { 0%{transform:rotate(0)} 25%{transform:rotate(15deg) scale(.95)} 50%{transform:rotate(-10deg)} 75%{transform:rotate(8deg) scale(1.05)} 100%{transform:rotate(0)} }
+
+.qinfo {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: .5rem;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text2);
+  font-size: 14px;
+}
+
+/* DIVIDER LINE */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: .75rem 0 .9rem;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="header">
+  <div class="header-title">Egzamin</div>
+  <div class="header-sub">Fiszki PM & IW</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Przedmiot</div>
+  <div class="btn-group">
+    <button class="subj-btn" id="btn-PM" onclick="setSubject('PM')">PM <span style="opacity:.5;font-size:12px">32</span></button>
+    <button class="subj-btn" id="btn-IW" onclick="setSubject('IW')">IW <span style="opacity:.5;font-size:12px">11</span></button>
+    <button class="subj-btn" id="btn-ALL" onclick="setSubject('ALL')">Wszystkie <span style="opacity:.5;font-size:12px">43</span></button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-label">Tryb losowania</div>
+  <div class="btn-group">
+    <button class="mode-btn" id="mode-smart" onclick="setMode('smart')">⭐ Smart</button>
+    <button class="mode-btn" id="mode-seq" onclick="setMode('seq')">Po kolei</button>
+    <button class="mode-btn" id="mode-rand" onclick="setMode('rand')">Losowo</button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-label">Filtr pytań</div>
+  <div class="btn-group" style="flex-wrap:wrap">
+    <button class="f-btn" id="f-all" onclick="setFilter('all')">Wszystkie</button>
+    <button class="f-btn" id="f-new" onclick="setFilter('new')">Nowe</button>
+    <button class="f-btn" id="f-weak" onclick="setFilter('weak')">Słabe</button>
+    <button class="f-btn" id="f-ok" onclick="setFilter('ok')">Średnie</button>
+    <button class="f-btn" id="f-done" onclick="setFilter('done')">Opanowane</button>
+  </div>
+</div>
+
+<div class="stats">
+  <span id="stat-new"></span>
+  <span id="stat-weak"></span>
+  <span id="stat-ok"></span>
+  <span id="stat-done"></span>
+  <button class="reset-btn" onclick="resetProgress()">↺ reset</button>
+</div>
+
+<div class="progress-wrap"><div class="progress-fill" id="pfill" style="width:0%"></div></div>
+
+<div id="empty-msg" class="empty" style="display:none">Brak pytań w tym filtrze.<br>Zmień filtr lub zresetuj postęp.</div>
+
+<div class="card" id="card" style="display:none">
+  <div class="card-top">
+    <div class="card-meta">
+      <div class="card-left">
+        <span class="card-num" id="qnum"></span>
+        <span class="pill" id="qtag"></span>
+        <span class="card-subj" id="qsubj"></span>
+      </div>
+      <span class="card-score" id="qscore"></span>
+    </div>
+    <div class="card-q" id="question" onclick="toggleAnswer()"></div>
+  </div>
+  <div id="tap-hint" class="card-hint" onclick="toggleAnswer()">Dotknij pytanie lub tu, aby zobaczyć odpowiedź</div>
+  <div id="answer-box" style="display:none">
+    <div class="card-answer">
+      <div class="ans-label">Minimum – ocena 3</div>
+      <div class="ans-min" id="short-ans"></div>
+      <div class="ans-label">Rozbudowana odpowiedź</div>
+      <div class="ans-long" id="long-ans"></div>
+    </div>
+    <div class="grade-area">
+      <div class="grade-label">Jak poszło?</div>
+      <div class="grade-row">
+        <button class="g-btn g0" onclick="grade(0)">Nie wiedziałem</button>
+        <button class="g-btn g1" onclick="grade(1)">Prawie</button>
+        <button class="g-btn g2" onclick="grade(2)">Wiedziałem</button>
+        <button class="g-btn g3" onclick="grade(3)">Pewnie!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="nav-btn" onclick="go(-1)">&#8592;</button>
+  <div class="dice-wrap">
+    <div class="dice-btn" id="d1" onclick="rollDice()">&#9856;</div>
+    <div class="dice-btn" id="d2" onclick="rollDice()">&#9856;</div>
+  </div>
+  <button class="nav-btn" onclick="go(1)">&#8594;</button>
+</div>
+<div class="qinfo" id="qinfo"></div>
+
+</div>
+
+<script>
+const D={PM:[
+{q:"Z jakich trzech podstawowych bloków składa się kompresor?",s:"tłumienia, sterowania i wzmocnienia kompensującego tłumienie",l:"Kompresor składa się z trzech bloków: <strong>bloku tłumienia</strong> (FET, układ optyczny lub VCA), <strong>bloku sterowania</strong> (analizuje poziom sygnału, generuje sygnał sterujący tłumieniem – tu analizuje się sidechain) oraz <strong>bloku wzmocnienia kompensującego</strong> (Make-up Gain – odbudowuje poziom sygnału obniżony przez kompresję)."},
+{q:"Czym jest sygnał kluczujący (sidechain) w kompresorze?",s:"sygnałem sterującym pracą bloku tłumienia",l:"Sidechain to tor sterowania – mówi kompresorowi KIEDY i JAK mocno tłumić sygnał główny. Domyślnie jest to ten sam sygnał co wejście (self-sidechain), ale można zastąpić zewnętrznym lub przefiltrować. Zastosowania: ducking, de-esser (HPF wyłapuje sybilant), kompresja reaktywna na bas (LPF w sidechain). Filtr działa tylko w torze detekcji, nie w torze audio."},
+{q:"Jakie są podstawowe elementy tłumiące w analogowych kompresorach?",s:"FET, elementy optyczne, VCA",l:"<strong>FET</strong> – tranzystor polowy, bardzo szybki (czasy ataku rzędu mikrosekund), agresywny i nasycony, kultowy UREI 1176. <strong>Opto</strong> – para LED/żarówka + fotorezystor, wolna i nieliniowa reakcja, naturalne i muzyczne brzmienie, klasyk: Teletronix LA-2A. <strong>VCA</strong> – wzmacniacz sterowany napięciem, precyzyjny i transparentny, SSL G-Bus, dbx 160."},
+{q:"Czym jest i do czego służy regulator Make-up Gain w kompresorze?",s:"kompensuje zmniejszenie poziomu sygnału wywołane kompresją",l:"Kompresja obniża poziom głośnych fragmentów. Make-up Gain odbudowuje utracony poziom. Przykład: kompresja zredukowała o 6 dB → Make-up Gain +6 dB przywraca poziom. Efekt: ciche fragmenty stają się relatywnie głośniejsze, brzmienie zwartsze. Wiele kompresorów ma opcję Auto Gain Compensation."},
+{q:"Czym jest konfiguracja Feed-forward w kompresorze?",s:"sterowanie tłumieniem z wejścia kompresora",l:"Feed-forward: blok sterowania analizuje sygnał na WEJŚCIU (przed tłumieniem). Zalety: precyzja i przewidywalność – kompresor reaguje na faktyczny sygnał wejściowy. Dominuje we współczesnych kompresorach cyfrowych i VCA."},
+{q:"Czym jest konfiguracja Feed-backward w kompresorze?",s:"sterowanie tłumieniem z wyjścia kompresora",l:"Feed-backward: blok sterowania analizuje sygnał na WYJŚCIU (po tłumieniu) – pętla ujemna sprzężenia zwrotnego. System 'słyszy' efekty własnej pracy z opóźnieniem. Efekt: trudniejsza przewidywalność, ale charakterystyczne muzyczne i gładkie brzmienie. Typowa cecha kompresorów optycznych i wielu klasycznych projektów."},
+{q:"Czym jest parametr czasu ataku (Attack) w kompresorze?",s:"po przekroczeniu Threshold – czas potrzebny na rozpoczęcie tłumienia",l:"Attack to czas (ms lub μs), po którym kompresor ZACZYNA tłumić sygnał po przekroczeniu Threshold. Krótki Attack – łapie najszybsze transjenty, brzmi agresywnie, może niszczyć punch. Długi Attack – przepuszcza transjentem, zachowuje naturalny atak instrumentu. Attack i Release razem decydują jak kompresor 'oddycha' z muzyką."},
+{q:"Czym jest parametr czasu powrotu (Release) w kompresorze?",s:"czas potrzebny na zaprzestanie tłumienia po spadku poniżej Threshold",l:"Release to czas, po którym kompresor PRZESTAJE tłumić po spadku poniżej progu. Krótki Release – szybki powrót, może powodować pompowanie (pumping) przy niskim Threshold i wysokim Ratio. Długi Release – gładsze brzmienie. Tryb Auto – kompresor sam dobiera optymalne czasy."},
+{q:"Na czym polega najważniejsza różnica między kompresorem a limiterem?",s:"regulowany parametr Ratio; teoretyczna nieprzekraczalność progu Threshold",l:"Kompresor ma regulowany Ratio: 2:1 = sygnał 2 dB powyżej progu → redukowany do 1 dB powyżej. Limiter ma Ratio ∞:1 lub bardzo wysokie (np. 20:1) – sygnał teoretycznie NIE przekracza progu na wyjściu. Limiter = sufit, chroni przed clippingiem, stosowany na końcu łańcucha masteringowego."},
+{q:"Jak zachowa się kompresor z filtrem pasmowoprzepustowym w sidechain?",s:"będzie reagował tylko na częstotliwości przepuszczane przez filtr",l:"Filtr pasmowoprzepustowy (bandpass) w sidechain sprawia, że blok sterowania 'słyszy' tylko wybraną wstęgę częstotliwości. Kompresor tłumi cały sygnał wyjściowy, ale decyzja zapada tylko gdy energia w tym paśmie przekroczy próg. Zastosowanie: de-esser (filtr 5–10 kHz wyłapuje sybilant). Sygnał wyjściowy pozostaje szerokopasmowy."},
+{q:"Jak zachowa się kompresor z filtrem górnoprzepustowym (HPF) w sidechain?",s:"będzie reagował tylko na wyższe tony, nie będzie reagował na niskie",l:"HPF w sidechain 'odcina' niskie częstotliwości z toru detekcji. Kompresor przestaje reagować na basy – głośny kopniak nie wywołuje kompresji całego miksu. Zastosowanie: mastering (stabilizacja kompresora), mix bus (brak pompowania od kick druma). Sygnał wyjściowy nadal pełnopasmowy."},
+{q:"Jak zachowa się kompresor z filtrem dolnoprzepustowym (LPF) w sidechain?",s:"będzie reagował tylko na niższe tony, nie będzie reagował na wysokie",l:"LPF w sidechain przepuszcza do detekcji tylko niskie częstotliwości. Kompresor reaguje wyłącznie na energię basową. Zastosowanie: sidechain compression – synth pad 'oddycha' razem z kick drumem, popularne w house i techno."},
+{q:"Jaka cecha jest najbardziej charakterystyczna dla kompresji optycznej?",s:"długie czasy ataku i zbieżność z cechami ludzkiego słuchu w kontekście dynamicznym",l:"Kompresja Opto bazuje na układzie LED/żarówka + fotorezystor. Reaguje wolniej i nieliniowo – im dłużej sygnał jest głośny, tym silniejsze tłumienie. Kompresor naturalnie 'przyzwyczaja się' do głośności – podobnie jak ludzki słuch. Klasyczny LA-2A nie ma regulacji Attack i Release – zależą od poziomu i historii sygnału. Idealne do wokali, akustycznych instrumentów i masteringu."},
+{q:"Jaka cecha jest najbardziej charakterystyczna dla kompresji FET?",s:"bardzo krótkie czasy ataku rzędu mikrosekund, zniekształcenia przy krótkich Attack i Release",l:"FET (Field Effect Transistor) – ultraszybka reakcja, czasy ataku nawet poniżej 1 μs. Kultowy UREI 1176. Krótki atak chwyta najszybsze transjenty, nadaje 'punch' i agresję. Przy bardzo krótkich Attack i Release pojawiają się harmoniczne zniekształcenia (nasycenie), często pożądane brzmieniowo. Świetny na perkusję, werbel, wokal rockowy, gitary elektryczne."},
+{q:"Czym jest zakres dynamiki urządzenia analogowego?",s:"różnica w dB między poziomem szumów własnych a poziomem nominalnym",l:"Zakres dynamiki (Dynamic Range) = różnica w dB między szumem własnym (noise floor) a poziomem nominalnym (roboczym). Przykład: szum = -90 dBu, poziom nominalny = 0 dBu → zakres dynamiki = 90 dB. Im większy, tym więcej cichych detali można zachować. Nie mylić z zapasem dynamiki (headroom)."},
+{q:"Czym jest zapas dynamiki urządzenia analogowego?",s:"różnica w dB między poziomem nominalnym a maksymalnym użytecznym",l:"Headroom = odległość w dB między poziomem nominalnym a maksymalnym użytecznym (przed clippingiem). W torach analogowych często 12–20 dB. Przykład: nominalny = 0 dBu, maks użyteczny = +18 dBu → headroom = 18 dB. Kluczowy przy nagrywaniu – chroni przed clippingiem na transjentach."},
+{q:"Na czym polega główna różnica między filtrem a korektorem?",s:"filtr oddziałuje na jeden zakres pasma, korektor składa się z co najmniej dwóch filtrów",l:"Filtr operuje na JEDNYM zakresie częstotliwości. Korektor (EQ) składa się z CO NAJMNIEJ DWÓCH filtrów działających na różnych zakresach jednocześnie. EQ graficzny – stałe częstotliwości pasm. EQ parametryczny – dowolna częstotliwość środkowa, szerokość (Q) i wartość wzmocnienia/tłumienia."},
+{q:"Czym jest nachylenie zbocza filtru (Slope)?",s:"wyrażone w dB/oktawę tłumienie rosnące z oddaleniem od częstotliwości granicznej",l:"Slope = tempo wzrostu tłumienia po przekroczeniu częstotliwości granicznej, wyrażone w dB/oktawę. Filtr 1. rzędu: 6 dB/okt. Filtr 2. rzędu: 12 dB/okt. Filtr 4. rzędu: 24 dB/okt. Im wyższe nachylenie, tym filtr bardziej stromy i precyzyjny."},
+{q:"Czym jest rezonans filtru dolnoprzepustowego?",s:"wzmocnienie dla pasma częstotliwości granicznej filtru",l:"Rezonans (Q lub Resonance) = podbicie amplitudy tuż przy częstotliwości granicznej (cutoff). Przy niskim Q – łagodne działanie. Przy wysokim Q – wyraźny 'garb'. Przy bardzo wysokim Q filtr wpada w samo-oscylację i generuje czysty ton na częstotliwości odcięcia (self-oscillation). Kluczowe narzędzie kształtowania barwy w syntezatorach."},
+{q:"Gdzie najczęściej znajdują zastosowanie filtry rezonansowe?",s:"w syntezatorach jako moduły VCF/DCF",l:"Filtry rezonansowe to podstawa syntezatorów subtraktywnych: VCF (Voltage Controlled Filter) w analogowych lub DCF (Digitally Controlled Filter) w cyfrowych. Sterując cutoff i rezonansem przez obwiednię ADSR lub LFO uzyskuje się charakterystyczne barwy – od 'wah' po agresywne skrzeczenie. Stosowane też w efektach gitarowych (wah-wah) i crossoverach głośnikowych."},
+{q:"Na czym polega szeregowe łączenie efektów w torze sygnałowym?",s:"łańcuchowe łączenie – wyjście poprzedzającego na wejście następnego",l:"Szeregowe (seryjne) łączenie: sygnał przechodzi kolejno przez efekty – wyjście jednego na wejście następnego. Efekty sumują się i wzajemnie wpływają. Kolejność ma znaczenie: EQ przed kompresorem daje inny efekt niż EQ po kompresorze. Alternatywa: łączenie równoległe (parallel processing)."},
+{q:"Czym jest tzw. kompresja nowojorska?",s:"przykład przetwarzania równoległego – sumowanie sygnału czystego z sygnałem po kompresji",l:"New York Compression (parallel compression): sygnał dzielony na dwie ścieżki – jedna przez kompresor (agresywne ustawienia), druga czysta. Obie sumowane w wybranej proporcji. Efekt: transjenty z czystej ścieżki zachowane (punch), ścieżka skompresowana dodaje gęstość i sustain. Popularne na perkusji i grupach perkusyjnych."},
+{q:"Na czym polega matrycowanie Mid-Side z sygnału stereo?",s:"wydzielenie składowej wspólnej monofonicznej (M) i różnicowej przestrzennej (S)",l:"M-S = przekształcenie stereo (L,R) na: <strong>M (Mid)</strong> = (L+R)/2 – wspólna, monofoniczna (wokal, kopniak, bas). <strong>S (Side)</strong> = (L–R)/2 – różnicowa, przestrzenna (pogłos, efekty stereo). Operacja odwracalna: L=M+S, R=M–S. Umożliwia niezależną obróbkę środka i boków obrazu stereo."},
+{q:"Technika Mid-Side jest techniką monofoniczną, stereofoniczną czy dwukanałową mono?",s:"dwukanałową mono",l:"Mikrofon Mid i mikrofon Side nagrywają każdy swój sygnał na oddzielny kanał – oba są MONO. To nie jest stereo klasyczne (brak rozdźwięku fazowego), ani mono (jest dwukanałowe). Dopiero po matrycowaniu M+S i M–S uzyskujemy pełnoprawne stereo. Główna zaleta: regulacja szerokości stereo PO nagraniu."},
+{q:"Wymień dwie koincydencyjne konfiguracje mikrofonowe stereo.",s:"Mid-Side, XY",l:"Konfiguracje koincydencyjne – kapsułki możliwie blisko siebie, obraz stereo tylko z różnic amplitudowych (nie czasowych). <strong>XY (Blumlein)</strong>: dwa mikrofony kierunkowe pod kątem 90°, kapsułki w tym samym punkcie. <strong>Mid-Side</strong>: mikrofon Mid (dowolna charakterystyka) + mikrofon Side (figura ósemkowa), ustawione w tym samym punkcie."},
+{q:"Jakie mikrofony używamy w konfiguracji Mid-Side?",s:"jeden ósemkowy (Side) i drugi dowolny (Mid)",l:"<strong>Mid</strong> – dowolna charakterystyka (kardioidalna, superkardioida, dookólna), skierowany wprost na źródło. <strong>Side</strong> – MUSI mieć figurę ósemkową (bidirectional), skierowany bokiem (90°) względem osi Mid. Oba możliwie blisko siebie. Do matrycowania: kanał S sumowany w jednej fazie (L) i przeciwnej fazie (R)."},
+{q:"Do jakich prac z dźwiękiem odnosi się technika Mid-Side?",s:"nagrania mikrofonowe, mastering, naprawa dźwięku, transmisja, płyta gramofonowa",l:"M-S jest wszechstronna: <strong>Nagrania</strong> – regulacja szerokości stereo po nagraniu. <strong>Mastering</strong> – niezależna korekcja i kompresja M i S. <strong>Naprawa dźwięku</strong> – eliminacja problemów fazowych. <strong>Transmisja</strong> – radiofonia AM to mono (składowa M), FM zawiera Side. <strong>Winyl</strong> – zapis stereo metodą M-S, stąd filtr eliptyczny."},
+{q:"Czym jest filtr eliptyczny?",s:"filtr HPF aplikowany do składowej Side, eliminujący najniższe tony; stosowany w masteringu dla płyt gramofonowych",l:"Filtr eliptyczny = HPF aplikowany TYLKO do składowej Side (różnicowej), używany w masteringu dla winylu. Powód: rylec wychyla się pionowo (Mid) i poziomo (Side). Bardzo niskie basy w Side generują poziome wychylenia rylca mogące wyrzucić igłę z rowka. Filtr eliptyczny eliminuje niskie basy z Side (zostawia je w Mid/mono)."},
+{q:"Na czym polega zasadnicza różnica między korektorem dynamicznym a kompresorem wielopasmowym?",s:"w korekcji dynamicznej pasma mogą się zachodzić, w kompresji pasmowej nie",l:"<strong>Kompresor wielopasmowy</strong> – dzieli sygnał crossoverami na oddzielne, nieprzekrywające się pasma; każde niezależnie kompresowane; możliwe artefakty fazowe. <strong>Korektor dynamiczny (dynamic EQ)</strong> – działa jak EQ parametryczny, pasma mogą zachodzić na siebie i reagują dynamicznie gdy sygnał przekroczy próg. Bardziej muzyczny i transparentny."},
+{q:"Co oznacza pojęcie koincydencji w zestawie mikrofonów?",s:"odległość między kapsułkami minimalizująca niezgodność fazową odbieranych sygnałów",l:"Koincydencja = rozmieszczenie kapsułek tak, by oba mikrofony 'słyszały' sygnał w tym samym czasie – minimalna różnica drogi dźwięku. Idealna koincydencja: oba mikrofony w tym samym punkcie (fizycznie niemożliwe). Praktycznie: ¼ długości fali 20 kHz ≈ 4,3 mm. Konfiguracje XY i M-S są koincydencyjne."},
+{q:"Czym różni się filtr pasmowy od półkowego?",s:"pasmowy – ograniczony zakres; półkowy – od pewnej częstotliwości do końca pasma",l:"<strong>Filtr pasmowy</strong> – ograniczony zakres, określony przez częstotliwość środkową i Q. Poza zakresem sygnał bez zmian. <strong>Filtr półkowy (shelf)</strong> – działa od częstotliwości granicznej do końca pasma. Low shelf: wzmacnia/tłumi wszystkie częstotliwości poniżej punktu. High shelf: powyżej punktu."},
+{q:"Co oznacza 0 dBfs?",s:"najwyższy możliwy poziom słowa bitowego w stałoprzecinkowym sygnale PCM",l:"dBfs (dB Full Scale) = maksymalny możliwy poziom cyfrowy, wszystkie bity słowa mają wartość 1. Przekroczenie powoduje cyfrowe clipping – twarde, brutalne przycięcie sygnału. W odróżnieniu od analogu (nasycenie taśmy jest stopniowe), digital clipping w PCM jest niszczące. Nagrywa się z marginesem, celując w -12 do -6 dBfs dla szczytów."}],
+IW:[
+{q:"Wymień podstawowe formaty wtyczek instrumentów wirtualnych stosowanych w programach DAW.",s:"VSTi, AUi, od niedawna CLAPi",l:"<strong>VSTi</strong> – Steinberg, standard de facto na Windows i Linux, wersje VST2 i VST3 (Side-chain, automatyzacja parametrów). <strong>AUi (Audio Unit)</strong> – natywny format Apple (macOS/iOS), Logic Pro, GarageBand. Niedostępny na Windows. <strong>CLAPi</strong> – nowy otwarty standard (2022, Bitwig + u-he), następca VST3 z lepszą obsługą polifonicznego modulowania."},
+{q:"Na czym polega subtraktywna synteza dźwięku?",s:"generowanie szerokopasmowego sygnału i kształtowanie go filtrem i obwiednią; subtrakcja = odejmowanie",l:"Nazwa: 'odejmować' – materiał wyjściowy jest bogatszy niż końcowy efekt. Schemat: <strong>Oscylator (VCO/DCO)</strong> generuje bogaty w harmoniczne sygnał (piła, kwadrat, szum). <strong>Filtr (VCF/DCF)</strong> – zwykle LPF – kształtuje barwę. <strong>Wzmacniacz (VCA)</strong> sterowany <strong>obwiednią ADSR</strong> nadaje kształt amplitudowy. <strong>LFO</strong> dodaje modulację. Klasyki: Moog Minimoog, Roland Juno, Prophet-5."},
+{q:"Czym są i do czego służą generatory przebiegów wolnozmiennych (LFO)?",s:"generatory przebiegów podakustycznych wykorzystywanych do modulacji",l:"LFO (Low Frequency Oscillator) generuje przebiegi poniżej progu słyszalności (0,01–~20 Hz). Sam nie tworzy słyszalnego tonu, ale moduluje inne parametry: częstotliwość oscylatora (vibrato), cutoff filtra (wah-wah), amplitudę (tremolo), panoramę. Kształty: sinus, kwadrat, piła, trójkąt, losowy (S&H). Synchronizacja z tempem (tempo sync) = rytmiczna modulacja."},
+{q:"Jakie jest główne zadanie filtru w syntezatorze subtraktywnym?",s:"dynamiczne lub statyczne kształtowanie finalnego dźwięku syntezatora",l:"Filtr (VCF/DCF) – kluczowy element kształtowania barwy. <strong>Statycznie</strong>: stała częstotliwość odcięcia, usuwa harmoniczne powyżej (LPF) lub poniżej (HPF). <strong>Dynamicznie</strong>: modulacja przez obwiednię tworzy 'sweep'. Modulacja przez LFO: wah-wah, pulsowanie. Rezonans (Q): wyeksponowanie konkretnej częstotliwości lub samo-oscylacja."},
+{q:"Czy sample mogą być podstawowym źródłem dźwięku we współczesnych syntezatorach?",s:"tak, ale tylko w syntezatorach całkowicie lub częściowo cyfrowych",l:"Tak – sample pełnią rolę oscylatorów w instrumentach cyfrowych: <strong>samplery</strong> (Kontakt, Halion) – podstawą jest nagrany dźwięk. <strong>Syntezatory wavetable</strong> (Serum, Massive) – każda klatka wavetable to krótka próbka. <strong>Hybrydowe</strong> (Omnisphere, Falcon) – łączą oscylatory z samplerami. W syntezatorach analogowych sample są niemożliwe."},
+{q:"Czym jest modulacja w syntezatorach?",s:"dynamiczne zmiany parametrów syntezy za pomocą modulatorów",l:"Modulacja: sterowanie jednym parametrem przez inny sygnał (modulator). Bez modulacji syntezator gra statyczne brzmienia. Przykłady: LFO → pitch = vibrato. Obwiednia ADSR → filtr = otwarcie barwy przy ataku. Velocity → amplituda = dynamika. Aftertouch → LFO = vibrato po przytrzymaniu. Matryca modulacji: dowolny modulator steruje dowolnym parametrem."},
+{q:"Jakie są dwa podstawowe modulatory w typowych syntezatorach?",s:"generatory wolnych przebiegów LFO, generatory obwiedni EG",l:"<strong>LFO</strong> – cykliczne przebiegi podakustyczne: vibrato, tremolo, wah, panorama. <strong>EG (Envelope Generator) / obwiednia ADSR</strong> – jednorazowy kształt wyzwalany przez note-on: <strong>A</strong>ttack (narastanie), <strong>D</strong>ecay (opadanie do Sustain), <strong>S</strong>ustain (poziom przy przytrzymaniu), <strong>R</strong>elease (zanikanie po zwolnieniu). Obwiednia amplitudy → głośność. Obwiednia filtra → barwa."},
+{q:"Na czym opiera się synteza dźwięku w syntezatorach FM?",s:"modulacji częstotliwości jednego oscylatora (carrier) częstotliwością drugiego (modulator)",l:"FM (Frequency Modulation): modulator zmienia częstotliwość nośnika (carrier) z dużą szybkością – w zakresie audio. Efekt: nowe harmoniczne i aharmoniczne składowe widma. Głębokość modulacji (modulation index) = bogactwo widmowe. Kultowy: Yamaha DX7 (1983). Współcześnie: FM8 (NI), Dexed (freeware). Charakterystyczne metaliczne, szkliste i dzwoniące brzmienia."},
+{q:"Co jest najbardziej wyrazistą brzmieniowo cechą syntezy FM?",s:"możliwość wytwarzania tonów nieharmonicznych",l:"FM generuje składowe widmowe, których stosunek do częstotliwości podstawowej nie jest całkowitą wielokrotnością – dźwięki <strong>aharmoniczne (nieharmoniczne)</strong>. Synteza subtraktywna bazuje na harmonicznych (piła = 1f, 2f, 3f...). FM może wygenerować 1,41f, 2,83f – brzmi jak dzwony, talerze, metaliczne pady. Stosunek C:M decyduje, czy dźwięk jest harmoniczny czy aharmoniczny."},
+{q:"Czy w jednym instrumencie można łączyć syntezę subtraktywną i FM?",s:"tak, gdy oscylatory pozwalają na wzajemną modulację",l:"Tak – synteza hybrydowa jest powszechna. Oscylatory mogą wzajemnie modulować swoje częstotliwości (FM), a następnie sygnał przechodzi przez filtry subtraktywne (VCF). Przykłady: Surge XT, Pigments (Arturia), Omnisphere, Serum."},
+{q:"Na czym polega synteza wavetable?",s:"oscylatory odtwarzają w danym momencie jedną próbkę z tablicy próbek (wavetable)",l:"Wavetable: oscylator w danym momencie odtwarza JEDNĄ krótką próbkę (ramkę) wybraną z tablicy zawierającej wiele kształtów fal. Kluczowe: przesuwanie przez tablicę (wavetable scanning/morphing) – pozycja zmienia się w czasie, tworząc ewoluującą barwę. Modulacja pozycji przez LFO lub obwiednię = charakterystyczne ruchliwe brzmienie. Pierwszy wavetable: PPG Wave (1979). Współcześnie: Serum, Massive X, Vital."}]};
+
+const DICE=['&#9856;','&#9857;','&#9858;','&#9859;','&#9860;','&#9861;'];
+let subject='PM',mode='smart',filter='all',shown=false,currentId=null;
+let scores={};try{scores=JSON.parse(localStorage.getItem('fiszki_v4')||'{}');}catch(e){}
+function save(){try{localStorage.setItem('fiszki_v4',JSON.stringify(scores));}catch(e){}}
+function gs(id){return scores[id]||{right:0,wrong:0,seen:0};}
+function status(id){const s=gs(id);if(s.seen===0)return'new';const t=s.right+s.wrong;if(t===0)return'new';const r=s.right/t;if(s.right>=3&&r>=0.8)return'done';if(r>=0.6)return'ok';return'weak';}
+function allIds(){let a=[];if(subject==='ALL'||subject==='PM')D.PM.forEach((_,i)=>a.push('PM_'+i));if(subject==='ALL'||subject==='IW')D.IW.forEach((_,i)=>a.push('IW_'+i));return a;}
+function getPool(){return allIds().filter(id=>filter==='all'||status(id)===filter).map(id=>{const[sv,i]=id.split('_');return{...D[sv][+i],id,subj:sv};});}
+let queue=[],qpos=0;
+function buildQ(){const pool=getPool();if(!pool.length){queue=[];return;}if(mode==='seq'){queue=[...pool];}else if(mode==='rand'){queue=shuf([...pool]);}else{queue=smartQ(pool);}qpos=0;}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function smartQ(pool){const w=pool.map(q=>{const s=status(q.id);return{q,w:s==='new'?4:s==='weak'?6:s==='ok'?3:1};});const n=Math.max(pool.length*2,20);const res=[];for(let i=0;i<n;i++)res.push(wpick(w));return res;}
+function wpick(w){let t=w.reduce((s,x)=>s+x.w,0),r=Math.random()*t;for(const{q,w:ww}of w){r-=ww;if(r<=0)return q;}return w[w.length-1].q;}
+function cur(){return queue.length?queue[qpos%queue.length]:null;}
+function render(){
+  const q=cur(),pool=getPool();
+  const empty=document.getElementById('empty-msg'),card=document.getElementById('card');
+  if(!q||!pool.length){empty.style.display='block';card.style.display='none';updateStats();return;}
+  empty.style.display='none';card.style.display='block';
+  currentId=q.id;
+  const pos=(qpos%queue.length)+1,tot=queue.length;
+  document.getElementById('qnum').textContent=mode==='smart'?pos+'/'+tot:pos+' z '+pool.length;
+  document.getElementById('question').textContent=q.q;
+  document.getElementById('short-ans').textContent=q.s;
+  document.getElementById('long-ans').innerHTML=q.l;
+  const sj=document.getElementById('qsubj');
+  sj.textContent=q.subj;sj.className='card-subj subj-'+q.subj;
+  const st=status(q.id);
+  const tag=document.getElementById('qtag');
+  const labels={new:'Nowe',weak:'Słabe',ok:'Średnie',done:'Opanowane'};
+  const cls={new:'pn',weak:'pw',ok:'po',done:'pd'};
+  tag.textContent=labels[st];tag.className='pill '+cls[st];
+  const sc=gs(q.id);
+  document.getElementById('qscore').textContent=sc.seen>0?'✓'+sc.right+' ✗'+sc.wrong:'';
+  document.getElementById('answer-box').style.display=shown?'block':'none';
+  document.getElementById('tap-hint').style.display=shown?'none':'block';
+  const done=allIds().filter(id=>status(id)==='done').length;
+  const pct=allIds().length?Math.round(done/allIds().length*100):0;
+  document.getElementById('pfill').style.width=pct+'%';
+  updateStats();
+  document.getElementById('qinfo').textContent=mode==='smart'?'Smart – częściej pyta o słabe i nowe':mode==='seq'?'Tryb: Po kolei':'Tryb: Losowo';
+}
+function updateStats(){
+  const ids=allIds();const c={new:0,weak:0,ok:0,done:0};
+  ids.forEach(id=>c[status(id)]++);
+  document.getElementById('stat-new').innerHTML='<span class="pill pn">Nowe: '+c.new+'</span>';
+  document.getElementById('stat-weak').innerHTML='<span class="pill pw">Słabe: '+c.weak+'</span>';
+  document.getElementById('stat-ok').innerHTML='<span class="pill po">Średnie: '+c.ok+'</span>';
+  document.getElementById('stat-done').innerHTML='<span class="pill pd">Opanowane: '+c.done+'</span>';
+}
+function toggleAnswer(){if(!cur())return;shown=!shown;if(shown){const sc=gs(currentId);sc.seen++;scores[currentId]=sc;save();}render();}
+function grade(v){const sc=gs(currentId);if(v>=2)sc.right++;else sc.wrong++;scores[currentId]=sc;save();shown=false;qpos++;if(mode==='smart'&&qpos>=queue.length)buildQ();render();}
+function go(d){shown=false;qpos=Math.max(0,qpos+d);if(qpos>=queue.length)qpos=0;render();}
+function rollDice(){
+  const d1=document.getElementById('d1'),d2=document.getElementById('d2');
+  let t=0;const iv=setInterval(()=>{
+    d1.innerHTML=DICE[Math.floor(Math.random()*6)];
+    d2.innerHTML=DICE[Math.floor(Math.random()*6)];
+    t++;
+    if(t>10){clearInterval(iv);
+      const f1=Math.floor(Math.random()*6),f2=Math.floor(Math.random()*6);
+      d1.innerHTML=DICE[f1];d2.innerHTML=DICE[f2];
+      const pool=getPool();if(!pool.length)return;
+      shown=false;
+      if(mode==='smart'){const nq=smartQ(pool);const pick=nq[Math.floor(Math.random()*Math.min(nq.length,6))];const idx=queue.findIndex(q=>q.id===pick.id);if(idx>=0)qpos=idx;else{queue.unshift(pick);qpos=0;}}
+      else{queue=shuf([...pool]);qpos=Math.floor(Math.random()*pool.length);}
+      render();}
+  },70);
+}
+function setSubject(s){
+  subject=s;shown=false;
+  ['PM','IW','ALL'].forEach(x=>{const b=document.getElementById('btn-'+x);b.className='subj-btn'+(x===s?' active-'+x:'');});
+  buildQ();render();
+}
+function setMode(m){
+  mode=m;shown=false;
+  ['smart','seq','rand'].forEach(x=>document.getElementById('mode-'+x).classList.toggle('active',x===m));
+  buildQ();render();
+}
+const fmap={all:'fa',new:'fn',weak:'fw',ok:'fo',done:'fd'};
+function setFilter(f){
+  filter=f;shown=false;
+  ['all','new','weak','ok','done'].forEach(x=>{const b=document.getElementById('f-'+x);b.className='f-btn'+(x===f?' '+fmap[f]:'');});
+  buildQ();render();
+}
+function resetProgress(){if(!confirm('Zresetować cały postęp nauki?'))return;scores={};save();buildQ();render();}
+// init
+setSubject('PM');setMode('smart');setFilter('all');
+</script>
+</body>
+</html>
