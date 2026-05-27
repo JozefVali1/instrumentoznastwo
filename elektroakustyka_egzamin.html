@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektroakustyka – Egzamin</title>
+<style>
+:root{--bg:#0f1117;--bg2:#1a1d27;--bg3:#22263a;--bd:#2e3350;--tx:#e2e8f0;--mu:#8892a4;
+--ps:#3b82f6;--pa:#0f1e3a;--gs:#10b981;--ga:#0a2218;--ls:#f59e0b;--la:#2a1d08;
+--fs:#a855f7;--fa:#1e0f33;--ws:#06b6d4;--wa:#06202a;--ms:#ef4444;--ma:#2a0d0d;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;}
+nav{position:sticky;top:0;z-index:99;background:#0c0e18;border-bottom:1px solid var(--bd);padding:8px 16px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+nav a{padding:3px 10px;border-radius:16px;font-size:12px;font-weight:700;text-decoration:none;border:1px solid;}
+.np{border-color:var(--ps);color:var(--ps);}
+.ng{border-color:var(--gs);color:var(--gs);}
+.nl{border-color:var(--ls);color:var(--ls);}
+.nf{border-color:var(--fs);color:var(--fs);}
+.nw{border-color:var(--ws);color:var(--ws);}
+.nm{border-color:var(--ms);color:var(--ms);}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px;}
+h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px;}
+.sub{text-align:center;color:var(--mu);font-size:13px;margin-bottom:32px;}
+.sec{scroll-margin-top:52px;margin-bottom:36px;}
+.sec-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;border-left:4px solid;margin-bottom:12px;}
+.sec-hdr h2{font-size:17px;font-weight:800;}
+.q{background:var(--bg2);border:1px solid var(--bd);border-radius:8px;margin-bottom:8px;overflow:hidden;}
+.q-top{padding:11px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;}
+.q-top:hover{background:var(--bg3);}
+.qn{font-size:11px;font-weight:800;padding:2px 7px;border-radius:5px;flex-shrink:0;margin-top:2px;}
+.qt{font-size:14px;font-weight:600;flex:1;}
+.qa{padding:0 14px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .2s;}
+.qa.open{max-height:800px;padding:0 14px 12px;}
+.ans{background:var(--bg3);border-radius:6px;padding:10px 12px;font-size:13.5px;}
+.ans ul{padding-left:18px;}
+.ans li{margin:3px 0;}
+.ans strong{color:#fbbf24;}
+.ans .hl{color:var(--ws);font-weight:600;}
+table.cmp{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px;}
+table.cmp th{background:var(--bg);color:var(--mu);font-size:11px;text-transform:uppercase;padding:6px 10px;text-align:left;}
+table.cmp td{padding:6px 10px;border-bottom:1px solid var(--bd);}
+table.cmp tr:last-child td{border-bottom:none;}
+.srch{width:100%;padding:9px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-size:14px;margin-bottom:16px;outline:none;}
+.srch:focus{border-color:var(--ws);}
+.hidden{display:none;}
+</style>
+</head>
+<body>
+<nav>
+  <a class="np" href="#psycho">Psychoakustyka</a>
+  <a class="ng" href="#akust">Akustyka pom.</a>
+  <a class="nl" href="#glos">Głośniki</a>
+  <a class="nf" href="#filtr">Filtry</a>
+  <a class="nw" href="#wzmac">Wzmacniacze</a>
+  <a class="nm" href="#mikro">Mikrofony</a>
+  <a class="nm" href="#bezprz" style="border-color:#f97316;color:#f97316">Bezprzewodowe</a>
+</nav>
+<div class="wrap">
+<h1>Elektroakustyka – Egzamin Końcowy</h1>
+<p class="sub">130 pytań · krótkie odpowiedzi · fokus na 2. rok</p>
+<input class="srch" placeholder="🔍 Szukaj pytania..." oninput="search(this.value)">
+
+<!-- ═══ PSYCHOAKUSTYKA ═══ -->
+<div id="psycho" class="sec">
+<div class="sec-hdr" style="background:var(--pa);border-color:var(--ps)"><h2 style="color:var(--ps)">Psychoakustyka i właściwości słuchu</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">1</span><span class="qt">Zmiana wysokości dźwięku o oktawę = jaka zmiana częstotliwości?</span></div>
+<div class="qa"><div class="ans"><strong>Oktawa = dwukrotna zmiana częstotliwości</strong><br>W górę: ×2 (np. 440 Hz → 880 Hz) | W dół: ÷2</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">2</span><span class="qt">Dla jakiej częstotliwości natężenie w dB odpowiada głośności w fonach?</span></div>
+<div class="qa"><div class="ans"><strong>1000 Hz</strong> — przy tej częstotliwości 1 dB SPL = 1 fon (punkt odniesienia krzywych izofonicznych)</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">3</span><span class="qt">Maskowanie dźwięku – co to jest?</span></div>
+<div class="qa"><div class="ans"><ul><li>Głośniejszy dźwięk uniemożliwia słyszenie cichszego</li><li>Najsilniejsze gdy dźwięki mają zbliżone częstotliwości</li><li>Baza dla kompresji audio (MP3, AAC)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">4</span><span class="qt">Zależność między ilością alikwotów a barwą dźwięku</span></div>
+<div class="qa"><div class="ans"><ul><li>Alikwoty = składowe harmoniczne powyżej tonu podstawowego</li><li>Im więcej i silniejsze alikwoty → brzmienie bogatsze, pełniejsze</li><li>Ich rozkład i amplituda decydują o unikalnej barwie każdego instrumentu</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">5</span><span class="qt">Adaptacja słuchu – na czym polega, jak się objawia, konsekwencje</span></div>
+<div class="qa"><div class="ans"><ul><li>Ucho dostosowuje czułość do długotrwałych dźwięków</li><li>Objaw: po głośnym koncercie chwilowe pogorszenie słuchu (temporary threshold shift)</li><li>Konsekwencje: trwałe uszkodzenie słuchu, szumy uszne (tinnitus)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">6</span><span class="qt">Kierunkowość słuchu – 3 parametry analizy</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>ITD</strong> – Interaural Time Difference (różnica czasu dotarcia dźwięku do obu uszu)</li><li><strong>ILD</strong> – Interaural Level Difference (różnica poziomów między uszami)</li><li><strong>HRTF</strong> – Head Related Transfer Function (barwowe wskazówki z małżowiny usznej)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">7</span><span class="qt">Krzywe izofoniczne – co ilustrują, kto opracował, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Opracowali <strong>Fletcher i Munson</strong> (1933), zaktualizowane jako <strong>ISO 226:2003</strong></li><li>Ilustrują: przy jakiej głośności (dB SPL) różne częstotliwości są odbierane jako równie głośne</li><li>Ucho najczulsze ok. 3–4 kHz, najmniej czułe na basy i bardzo wysokie tony</li><li>Zastosowanie: projektowanie korektorów loudness, normalizacja głośności (LUFS)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">8</span><span class="qt">Czy zmiana natężenia wpływa na barwę dźwięku?</span></div>
+<div class="qa"><div class="ans"><strong>Tak.</strong> Przy wyższym natężeniu basy i soprany są słyszane proporcjonalnie głośniej względem środka pasma (krzywe izofoniczne się wypłaszczają). Stąd guzik „loudness" w sprzęcie hi-fi.</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">9</span><span class="qt">Różnica między natężeniem dźwięku a głośnością</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Natężenie</strong> = fizyczne (mierzalne): W/m² lub dB SPL</li><li><strong>Głośność</strong> = subiektywne wrażenie psychoakustyczne: fony lub sone</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">10</span><span class="qt">Zakres częstotliwości odbieranych przez ucho ludzkie</span></div>
+<div class="qa"><div class="ans"><strong>20 Hz – 20 000 Hz</strong> (20 kHz). Uwaga: zmniejsza się z wiekiem, głównie górna granica.</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">24</span><span class="qt">Jaka wielkość fizyczna określa wysokość dźwięku?</span></div>
+<div class="qa"><div class="ans"><strong>Częstotliwość</strong> [Hz]. Wyższa częstotliwość = wyższy dźwięk.</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">25</span><span class="qt">Co to jest głośność i od czego zależy?</span></div>
+<div class="qa"><div class="ans"><ul><li>Subiektywne wrażenie słuchowe siły dźwięku</li><li>Zależy od: SPL, częstotliwości, czasu trwania, maskowania, stanu słuchacza</li><li>Jednostki: fony, sone</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">26</span><span class="qt">Jak nazywa się przestrzeń, w której istnieją fale dźwiękowe?</span></div>
+<div class="qa"><div class="ans"><strong>Pole akustyczne</strong></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">45</span><span class="qt">Od czego zależy barwa dźwięku?</span></div>
+<div class="qa"><div class="ans"><ul><li>Ilości i rozkładu alikwotów (harmonicznych)</li><li>Obwiedni dźwięku (atak, zanik)</li><li>Formantu instrumentu</li><li>Transjentu (stan nieustalony na początku)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--pa);color:var(--ps)">46</span><span class="qt">Co to jest ton podstawowy?</span></div>
+<div class="qa"><div class="ans">Najniższa składowa częstotliwościowa dźwięku złożonego. Decyduje o odczuwanej wysokości dźwięku. = 1. harmoniczna.</div></div></div>
+</div>
+
+<!-- ═══ AKUSTYKA POMIESZCZEŃ ═══ -->
+<div id="akust" class="sec">
+<div class="sec-hdr" style="background:var(--ga);border-color:var(--gs)"><h2 style="color:var(--gs)">Akustyka pomieszczeń</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">11</span><span class="qt">Odległość graniczna – co to jest, 3 przypadki zastosowania</span></div>
+<div class="qa"><div class="ans"><ul><li>Odległość od źródła, gdzie poziom dźwięku bezpośredniego = poziomowi pola pogłosowego</li><li>Zastosowanie: 1) ustawienie mikrofonów, 2) projektowanie akustyki sal, 3) nagłośnienie (systemy PA)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">12</span><span class="qt">Zjawisko echa</span></div>
+<div class="qa"><div class="ans"><ul><li>Wyraźne powtórzenie dźwięku po pierwotnym</li><li>Powstaje gdy odbicie dociera <strong>&gt;50 ms</strong> po dźwięku bezpośrednim (odległość &gt;17 m)</li><li>Różni się od pogłosu: echo to dyskretne powtórzenie, pogłos – ciągłe zanikanie</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">13</span><span class="qt">Flutter (Flatter) – gdzie występuje, jak eliminować?</span></div>
+<div class="qa"><div class="ans"><ul><li>Szybka seria ech między dwiema <strong>równoległymi, odbijającymi powierzchniami</strong></li><li>Słyszany jako metaliczne „bzyknięcie" lub dzwonienie</li><li>Eliminacja: pochylenie ścian, panele pochłaniające, rozpraszacze (dyfuzory)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">14</span><span class="qt">Rewerberancja – co to jest, jednostka, zakres</span></div>
+<div class="qa"><div class="ans"><ul><li>Utrzymywanie się dźwięku po wyłączeniu źródła wskutek wielokrotnych odbić</li><li>Jednostka: <strong>sekundy [s]</strong> – czas T60 (zanik o 60 dB)</li><li>Zakres: 0,2 s (studio nagrań) → &gt;10 s (duże katedry)</li><li>Optimum: mowa 0,5–1,0 s; muzyka klasyczna 1,5–2,1 s</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">15</span><span class="qt">Pomiar rezonansów pomieszczenia – metody i wzór</span></div>
+<div class="qa"><div class="ans"><ul><li>Metody: pomiar tonem zamiatającym (sweep) + mikrofon pomiarowy + oprogramowanie (np. REW)</li><li>Obliczenia: f = c / (2L) gdzie c=340 m/s, L=długość pomieszczenia</li><li>Symulacja komputerowa</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">16</span><span class="qt">12 czynników wpływających na akustykę pomieszczenia</span></div>
+<div class="qa"><div class="ans"><ul>
+<li>Materiały wykończeniowe powierzchni</li><li>Rozmiar (kubatura)</li><li>Kształt</li><li>Czas pogłosu</li><li>Chłonność akustyczna</li><li>Odbicia (kierunkowe i rozproszone)</li><li>Gęstość powietrza</li><li>Temperatura (prędkość dźwięku)</li><li>Wilgotność</li><li>Porowatość materiałów</li><li>Wyposażenie (meble, fotele)</li><li>Ludzie w pomieszczeniu</li>
+</ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">17</span><span class="qt">Chłonność akustyczna – definicja i jednostka</span></div>
+<div class="qa"><div class="ans"><ul><li>Pochłanianie energii dźwiękowej przez wszystkie powierzchnie + ludzi + przedmioty + tłumienie w powietrzu</li><li>Jednostka: <strong>SABIN</strong> [m²] — 1 sabin = 1 m² powierzchni całkowicie pochłaniającej</li><li>Wzór Sabine'a: <strong>T = 0,153 × V / A</strong> (V = objętość [m³], A = chłonność [m²])</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">18</span><span class="qt">Prędkość dźwięku w powietrzu – wartość, zależność od temperatury i wilgotności</span></div>
+<div class="qa"><div class="ans"><ul><li>~<strong>340 m/s</strong> przy 20°C</li><li>Wzór: <strong>c = 331,4 + 0,6 × t</strong> [m/s] (t = temperatura w °C)</li><li>Wzrost temperatury → wzrost prędkości (~0,6 m/s na °C)</li><li>Wilgotność: nieznaczny wzrost prędkości</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">19</span><span class="qt">5 metod walki ze złą akustyką pomieszczeń</span></div>
+<div class="qa"><div class="ans"><ul>
+<li><strong>Pochłaniacze</strong> – pianka, wełna mineralna → absorbują głównie wysokie częstotliwości</li>
+<li><strong>Rozpraszacze (dyfuzory)</strong> – rozbijają fale na wiele kierunków, eliminują mocne odbicia</li>
+<li><strong>Pułapki basowe (bass traps)</strong> – rezonatory pochłaniające niskie częstotliwości</li>
+<li><strong>Materiały i tkaniny</strong> – dywany, zasłony, tapicerka</li>
+<li><strong>Ustroje membranowe/perforowane</strong> – celowane pochłanianie wybranych pasm</li>
+</ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">20</span><span class="qt">Ustroje akustyczne – wymień i opisz</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th>Ustrój</th><th>Działa na</th></tr>
+<tr><td>Membranowy/płytowy</td><td>Niskie częstotliwości (100–300 Hz)</td></tr>
+<tr><td>Perforowany</td><td>Średnie (500–2000 Hz)</td></tr>
+<tr><td>Szczelinowy</td><td>Średnie (kontynuacja perforowanego)</td></tr>
+<tr><td>Przestrzenny</td><td>Wszystkie pasma (aktywny ze wszystkich stron)</td></tr>
+<tr><td>Porowaty (pianka/wełna)</td><td>Wysokie częstotliwości</td></tr>
+<tr><td>Rozpraszacz (dyfuzor)</td><td>Rozprasza wszystkie pasma</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">21</span><span class="qt">Wpływ umieszczenia głośników w rogach pomieszczenia</span></div>
+<div class="qa"><div class="ans">Wzmocnienie basów (efekt narożny). Rogi sumują odbicia z 3 ścian → wzrost ciśnienia dla niskich częstotliwości (modów pomieszczenia: 20, 40, 80, 160, 320 Hz i ich wielokrotności).</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">22</span><span class="qt">Szum różowy – co to jest, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Szum o <strong>równej energii na każdą oktawę</strong> (moc maleje 3 dB/oktawę, 1/f)</li><li>Zastosowanie: pomiary akustyki pomieszczeń, strojenie systemów PA, testowanie charakterystyki głośników, maskowanie dźwięków</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">23</span><span class="qt">Mechanizm słyszenia człowieka</span></div>
+<div class="qa"><div class="ans">Fala dźwiękowa → małżowina uszna → przewód słuchowy → błona bębenkowa (drgania) → kosteczki (młoteczek, kowadełko, strzemiączko) → okienko owalne → ślimak (analiza częstotliwości na błonie podstawnej) → komórki rzęsate → nerw słuchowy → mózg</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">27</span><span class="qt">Zadania izolacji akustycznej</span></div>
+<div class="qa"><div class="ans"><ul><li>Redukcja przenikania dźwięku przez ściany/podłogi/sufity</li><li>Przykłady izolacyjności: cegła 20 cm = 50 dB, szyba 5 mm = 25 dB, drzwi dębowe = 25 dB, płyta stalowa 1 mm = 30 dB</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--ga);color:var(--gs)">47</span><span class="qt">Wpływ porowatości na chłonność akustyczną</span></div>
+<div class="qa"><div class="ans">Wyższa porowatość = większa chłonność, szczególnie na <strong>wysokich częstotliwościach</strong>. Mechanizm: powietrze przepływające przez pory traci energię na tarcie (zamiana na ciepło).</div></div></div>
+</div>
+
+<!-- ═══ GŁOŚNIKI ═══ -->
+<div id="glos" class="sec">
+<div class="sec-hdr" style="background:var(--la);border-color:var(--ls)"><h2 style="color:var(--ls)">Głośniki i systemy nagłośnieniowe</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">28</span><span class="qt">Zasada działania głośnika dynamicznego</span></div>
+<div class="qa"><div class="ans"><ul><li>Sygnał elektryczny → prąd w <strong>cewce drgającej</strong> → siła elektromagnetyczna w szczelinie magnesu stałego → ruch cewki i membrany → fala akustyczna</li><li>Elementy: membrana (stożek), cewka drgająca (karkas z uzwojeniem), magnes stały, kosz, zawieszenie</li><li>Kopułka na środku membrany = zaślepka dziury karkasa (nie ma wpływu akustycznego)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">29</span><span class="qt">Zasada działania głośnika wstęgowego</span></div>
+<div class="qa"><div class="ans"><ul><li>Cienka folia metalowa (wstążka) zawieszona między dwoma przeciwnie spolaryzowanymi magnesami</li><li>Prąd audio → siła na wstążkę → ruch = drgania akustyczne</li><li>Charakterystyka <strong>ósemkowa</strong>, bardzo dokładny na wysokich częstotliwościach</li><li>Wymaga transformatora (bardzo niska impedancja wstążki ~0,1 Ω)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">30</span><span class="qt">Podział głośników ze względu na pasmo przenoszenia</span></div>
+<div class="qa"><div class="ans"><ul><li>Niskotonowe (subwoofer, bass)</li><li>Nisko-średniotonowe</li><li>Średniotonowe (midrange)</li><li>Wysokotonowe (tweeter)</li><li>Szerokopasmowe (full-range)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">31</span><span class="qt">6 parametrów głośnika (budowa i właściwości nominalne)</span></div>
+<div class="qa"><div class="ans"><ul><li>Moc znamionowa [W]</li><li>Moc muzyczna [W]</li><li>Charakterystyka przenoszenia (pasmo)</li><li>Efektywność [dB/W/m]</li><li>Charakterystyka kierunkowości</li><li>Impedancja znamionowa [Ω]</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">32</span><span class="qt">Efektywność głośnika – co to jest, jednostka</span></div>
+<div class="qa"><div class="ans"><ul><li>Poziom ciśnienia akustycznego uzyskany w odległości <strong>1 m</strong> przy podaniu <strong>1 W</strong></li><li>Jednostka: <strong>dB SPL (1W/1m)</strong></li><li>Typowe wartości: 86–104 dB</li><li>Efektywność ≠ sprawność (sprawność = moc akustyczna / moc elektryczna, zwykle 1–5%)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">33</span><span class="qt">Dwa sposoby podziału pasma między głośnikami</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Aktywny (elektroniczny)</strong> – zwrotnica przed wzmacniaczami (na poziomie line), każde pasmo ma własny wzmacniacz. Lepsza kontrola, umożliwia bi-amp/tri-amp.</li><li><strong>Pasywny</strong> – zwrotnica po wzmacniaczu, bezpośrednio przy głośniku (filtr RLC). Prostszy, ale straty energii.</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">34</span><span class="qt">4 metody kontroli propagacji fali dźwiękowej</span></div>
+<div class="qa"><div class="ans"><ul><li>Mechaniczne rozstawienie głośników (array, linia)</li><li>Elektroniczne opóźnienia (delay)</li><li>Przetwarzanie DSP (filtrowanie, korekcja)</li><li>Fizyczne ukształtowanie obudowy / horn</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">35</span><span class="qt">Zastosowania systemów 100V i 70V</span></div>
+<div class="qa"><div class="ans"><ul><li>Systemy rozgłoszeniowe (kościoły, szkoły, lotniska, radiowęzły)</li><li>Transformator podwyższa napięcie → wiele głośników na jednym kablu z indywidualną regulacją głośności</li><li>100V = standard europejski, 70V = standard USA</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">36</span><span class="qt">Różnice między aktywnym i pasywnym systemem głośnikowym</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>Pasywny</th><th>Aktywny</th></tr>
+<tr><td>Zwrotnica</td><td>Po wzmacniaczu (pasywna)</td><td>Przed wzmacniaczem (aktywna DSP)</td></tr>
+<tr><td>Wzmacniacze</td><td>Jeden wspólny</td><td>Osobny dla każdego pasma</td></tr>
+<tr><td>Kabel do kolumny</td><td>Głośnikowy</td><td>XLR/sygnałowy</td></tr>
+<tr><td>Kontrola</td><td>Ograniczona</td><td>Pełna (delay, EQ, limit)</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">37</span><span class="qt">Bi-amp i tri-amp – zasada działania, co jest potrzebne</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Bi-amp</strong>: zwrotnica elektroniczna dzieli sygnał na 2 pasma (HF + LF), każde pasmo ma osobny wzmacniacz</li><li><strong>Tri-amp</strong>: 3 pasma (LF + MF + HF), 3 wzmacniacze</li><li>Potrzebne: <strong>4-pinowe kable Speakon</strong> (osobne piny dla HF i LF)</li><li>Zalety: lepsza kontrola, mniejsze zniekształcenia, ochrona głośników</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">38</span><span class="qt">4 rodzaje obudów kolumn głośnikowych</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Otwarta</strong> (open baffle) – bez obudowy, naturalny bas, duże wymiary</li><li><strong>Zamknięta</strong> (sealed) – kontrolowany bas, małe rozmiary, wyższe zniekształcenia</li><li><strong>Bass-reflex</strong> (z otworem) – port strojony, głębszy bas, lepsza sprawność</li><li><strong>Bandpass</strong> – dwa komory, wąskie pasmo, wysokie SPL</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">39</span><span class="qt">Parametry brane pod uwagę przy rozstawianiu głośników</span></div>
+<div class="qa"><div class="ans"><ul><li>Kąt pokrycia (coverage angle)</li><li>Odległość od słuchaczy</li><li>Równomierność SPL w całej przestrzeni</li><li>Charakterystyka częstotliwościowa na pozycjach słuchaczy</li><li>Opóźnienie (wyrównanie fazy z głównym PA)</li><li>Akustyka pomieszczenia (pogłos, odbicia)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">40</span><span class="qt">W jakich sytuacjach stosujemy opóźnienia?</span></div>
+<div class="qa"><div class="ans"><ul><li>Nagłośnienie dużych przestrzeni (głośniki wypełniające – delay fills)</li><li>Wyrównanie fazy między głównym PA a głośnikami uzupełniającymi (efekt Haasa)</li><li>Ukierunkowanie fali basowej (bass cardioid)</li><li>Poprawa czytelności mowy</li><li>Zamaskowanie faktu nagłaśniania</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">41</span><span class="qt">Urządzenia dające możliwość opóźniania głośników</span></div>
+<div class="qa"><div class="ans"><ul><li>Procesory DSP (np. dbx DriveRack, BSS Soundweb)</li><li>Cyfrowe jednostki delay</li><li>Procesory zarządzania systemem głośnikowym</li><li>Crossovery z funkcją opóźnienia</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">42</span><span class="qt">Dopuszczalne normy SPL dla pomieszczeń i przestrzeni otwartych</span></div>
+<div class="qa"><div class="ans"><ul><li>Stanowiska pracy: maks. <strong>85 dB(A)</strong> przez 8h (dyrektywa EU 2003/10/WE)</li><li>Eventy muzyczne (UE): maks. <strong>100 dB(A) LAeq</strong> uśrednione przez 8h</li><li>Peak: <strong>140 dB SPL</strong> (próg bólu/uszkodzenia)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">43</span><span class="qt">Wpływ warunków atmosferycznych na dźwięk</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Temperatura</strong>: wyższa → szybszy dźwięk; gradient temp. → załamanie fali (refraction)</li><li><strong>Wiatr</strong>: zgodnie z wiatrem dźwięk ugina się ku ziemi (dalej słyszalny), pod wiatr – ucieka w górę</li><li><strong>Wilgotność</strong>: nieznaczny wzrost prędkości, wzrost tłumienia bardzo wysokich częstotliwości</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">48</span><span class="qt">Do czego służą obudowy głośników?</span></div>
+<div class="qa"><div class="ans"><ul><li>Zapobiegają akustycznemu zwarciu (front vs tył membrany)</li><li>Kształtują charakterystykę basową</li><li>Chronią przetwornik</li><li>Kierunkują promieniowanie dźwięku</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">49</span><span class="qt">Dlaczego buduje się zespoły głośników?</span></div>
+<div class="qa"><div class="ans">Żaden pojedynczy przetwornik nie jest w stanie odtworzyć całego zakresu częstotliwości słyszalnych (20 Hz – 20 kHz) z dobrą jakością i sprawności.</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">51</span><span class="qt">4 powody budowania zespołów głośnikowych</span></div>
+<div class="qa"><div class="ans"><ul><li>Żaden pojedynczy głośnik nie pokrywa pełnego pasma</li><li>Zwiększenie maksymalnego SPL</li><li>Lepsza kontrola kierunkowości</li><li>Lepsza sprawność i mniejsze zniekształcenia w każdym paśmie</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">56</span><span class="qt">Sposoby kierowania i kształtowania fali – mechaniczne i elektroniczne</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Mechaniczne</strong>: horn, baffle, fizyczne rozmieszczenie (array), kształt obudowy</li><li><strong>Elektroniczne</strong>: opóźnienia (delay), DSP beam steering, filtrowanie, korekcja fazy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--la);color:var(--ls)">57</span><span class="qt">Spadek ciśnienia akustycznego – źródło punktowe vs liniowe</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Źródło punktowe</strong> (point source): <span class="hl">–6 dB</span> przy podwojeniu odległości (prawo odwrotnych kwadratów)</li><li><strong>Źródło liniowe</strong> (line array): <span class="hl">–3 dB</span> przy podwojeniu odległości</li><li>Dlatego line array utrzymuje SPL na większych dystansach</li></ul></div></div></div>
+</div>
+
+<!-- ═══ FILTRY ═══ -->
+<div id="filtr" class="sec">
+<div class="sec-hdr" style="background:var(--fa);border-color:var(--fs)"><h2 style="color:var(--fs)">Filtry i elektronika</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">59</span><span class="qt">6 rodzajów filtrów ze względu na podział pasma</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Dolnoprzepustowy (LP)</strong> – przepuszcza niskie, tłumi wysokie</li><li><strong>Górnoprzepustowy (HP)</strong> – przepuszcza wysokie, tłumi niskie</li><li><strong>Pasmoprzepustowy (BP)</strong> – przepuszcza wybrane pasmo</li><li><strong>Pasmowozaporowy (BS/Notch)</strong> – tłumi wybrane pasmo</li><li><strong>Półkowy (Shelving)</strong> – modyfikuje od danej częstotliwości w górę lub dół</li><li><strong>Wszechprzepustowy (All-pass)</strong> – zmienia fazę bez wpływu na amplitudę</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">60</span><span class="qt">Jak określa się częstotliwość podziału pasma w filtrach RLC?</span></div>
+<div class="qa"><div class="ans"><strong>f = 1 / (2π√LC)</strong><br>gdzie L = indukcyjność [H], C = pojemność [F]<br>To częstotliwość rezonansowa obwodu LC.</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">61</span><span class="qt">Elementy elektroniczne filtrów RLC – opisz wybrane połączenie</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>R</strong> – rezystor (tłumienie), <strong>L</strong> – cewka (indukcyjność), <strong>C</strong> – kondensator (pojemność)</li><li>Szeregowy RLC: przy rezonansie impedancja minimalna → max prąd → filtr BP</li><li>Równoległy RLC: przy rezonansie impedancja maksymalna → min prąd → filtr BS</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">62</span><span class="qt">Filtr Bessela – zasada działania i charakter</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Liniowa charakterystyka fazowa</strong> (stałe opóźnienie grupowe)</li><li>Brak przeregulowania (overshootu) na przebiegu prostokątnym</li><li>Najłagodniejszy spadek amplitudy przy f odcięcia</li><li>Zastosowanie: gdy ważna jest spójność fazowa (crossovery, filtry audio)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">63</span><span class="qt">Filtr Butterwortha – zasada działania i charakter</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Maksymalnie płaska charakterystyka amplitudowa</strong> w paśmie przepuszczania (brak falowania)</li><li>–3 dB dokładnie przy częstotliwości odcięcia</li><li>Stromy spadek: –20n dB/dekadę (n = rząd filtru)</li><li>Dobry kompromis między płaskością a spadkiem</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">64</span><span class="qt">Filtr Czebyszewa I i II typu</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Typ I</strong>: równomierne falowanie (ripple) w paśmie przepuszczania → <strong>ostrzejszy spadek</strong> niż Butterworth</li><li><strong>Typ II</strong>: równomierne falowanie w paśmie zaporowym → płaskie pasmo przepuszczania</li><li>Oba: większe zniekształcenia fazowe niż Butterworth</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">65</span><span class="qt">Butterworth vs Czebyszew – wady i zalety</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>Butterworth</th><th>Czebyszew</th></tr>
+<tr><td>Pasmo przepuszczania</td><td>Płaskie (brak ripple)</td><td>Ripple (falowanie)</td></tr>
+<tr><td>Stromość spadku</td><td>Umiarkowana</td><td>Stroma</td></tr>
+<tr><td>Faza</td><td>Lepsza</td><td>Gorsza</td></tr>
+<tr><td>Zastosowanie</td><td>Gdy liczy się płaskość</td><td>Gdy liczy się strome odcięcie</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">66</span><span class="qt">O ile przesunie się faza przy filtrze 24 dB/oktawę?</span></div>
+<div class="qa"><div class="ans"><ul><li>24 dB/oktawę = filtr <strong>4. rzędu</strong></li><li>Każdy rząd przesuwa fazę o 90°</li><li>4 × 90° = <strong>360°</strong> przesunięcia fazy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">67</span><span class="qt">Crossover – zasada działania i zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Urządzenie dzielące sygnał audio na pasma częstotliwości dla różnych przetworników</li><li>Aktywny (przed wzmacniaczem) lub pasywny (po wzmacniaczu)</li><li>Zastosowanie: systemy bi-amp/tri-amp, zestawy głośnikowe wielodrożne</li><li>Ustawienie: częstotliwość podziału, stromość (dB/okt), wyrównanie fazy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--fa);color:var(--fs)">68</span><span class="qt">Procesor sygnałowy DSP – zasada działania i konfiguracja</span></div>
+<div class="qa"><div class="ans"><ul><li>Przetwarza sygnał cyfrowo: EQ, kompresja, limiting, crossover, opóźnienie, odwrócenie polaryzacji</li><li>Stosowany do zarządzania systemem głośnikowym (np. dbx DriveRack, BSS, Yamaha SP)</li><li>Konfiguracja: wejście → EQ → crossover → delay → limiter → wyjście do wzmacniaczy</li></ul></div></div></div>
+</div>
+
+<!-- ═══ WZMACNIACZE ═══ -->
+<div id="wzmac" class="sec">
+<div class="sec-hdr" style="background:#1a1200;border-color:#f59e0b"><h2 style="color:#f59e0b">Wzmacniacze</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">70</span><span class="qt">Budowa lampy elektronowej</span></div>
+<div class="qa"><div class="ans"><ul><li>Próżniowa bańka szklana</li><li><strong>Katoda</strong> – emiter elektronów (podgrzewana)</li><li><strong>Anoda (Plate)</strong> – zbiera elektrony</li><li><strong>Siatka sterująca (G1)</strong> – kontroluje przepływ elektronów</li><li>Pentody mają dodatkowo: siatka ekranująca (G2), siatka tłumiąca (G3)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">71</span><span class="qt">Kiedy lampy chłodzone są wodą?</span></div>
+<div class="qa"><div class="ans">Lampy wielkich mocy (nadajniki radiowe, wzmacniacze mocy klasy kW). W elektroakustyce: bardzo duże wzmacniacze PA o mocach setek kilowatów (np. systemy stadionowe).</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">72</span><span class="qt">Single-Ended we wzmacniaczu lampowym</span></div>
+<div class="qa"><div class="ans"><ul><li>Jedna lampa wyjściowa obsługuje <strong>pełny cykl</strong> sygnału</li><li>Praca w klasie A, mała moc, dominują <strong>harmoniczne parzyste</strong> (uznawane za muzyczne)</li><li>Zastosowanie: audiofilia, wzmacniacze gitarowe</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">73</span><span class="qt">Push-Pull we wzmacniaczu lampowym</span></div>
+<div class="qa"><div class="ans"><ul><li>Dwie lampy: jedna obsługuje dodatnią, druga ujemną połówkę sygnału</li><li>Lepsza sprawność (klasa AB/B), większa moc</li><li>Eliminuje <strong>harmoniczne parzyste</strong> (znoszą się)</li><li>Standardowa konfiguracja większości wzmacniaczy lampowych</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">74</span><span class="qt">Ultralinear we wzmacniaczu lampowym</span></div>
+<div class="qa"><div class="ans"><ul><li>Push-Pull z siatkami ekranującymi podłączonymi do odczepu transformatora wyjściowego (~40–43%)</li><li>Łączy zalety triody (małe zniekształcenia) i pentody (duża moc)</li><li>Kompromis: lepsza moc niż trioda, mniejsze THD niż pentoda</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">75</span><span class="qt">Cechy charakterystyczne tranzystorów bipolarnych (BJT)</span></div>
+<div class="qa"><div class="ans"><ul><li>Urządzenie <strong>sterowane prądem</strong> (prąd bazy steruje prądem kolektora)</li><li>Niska impedancja wejściowa</li><li>Typy: NPN, PNP</li><li><strong>Ujemny współczynnik temperaturowy</strong> → wzrost temp. → wzrost prądu → ryzyko thermal runaway</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">76</span><span class="qt">Cechy charakterystyczne tranzystorów MOSFET</span></div>
+<div class="qa"><div class="ans"><ul><li>Urządzenie <strong>sterowane napięciem</strong> (napięcie bramki)</li><li>Bardzo wysoka impedancja wejściowa</li><li>Typy: N-channel, P-channel</li><li><strong>Dodatni współczynnik temperaturowy</strong> → wzrost temp. → spadek prądu → samoograniczający</li><li>Szybkie przełączanie, dobre dla wzmacniaczy klasy D</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">77</span><span class="qt">Współczynnik temperaturowy – BJT vs MOSFET</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>BJT (bipolar)</th><th>MOSFET</th></tr>
+<tr><td>Charakter</td><td>Ujemny</td><td>Dodatni</td></tr>
+<tr><td>Wzrost temp →</td><td>Wzrost prądu</td><td>Spadek prądu</td></tr>
+<tr><td>Ryzyko</td><td>Thermal runaway → uszkodzenie</td><td>Samoregulacja – bezpieczny</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">78</span><span class="qt">Wady i zalety konstrukcji lampowych i tranzystorowych</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>Lampowe</th><th>Tranzystorowe</th></tr>
+<tr><td>Brzmienie</td><td>Ciepłe, harmoniczne parzyste</td><td>Dokładne, harmoniczne nieparzyste przy nasyceniu</td></tr>
+<tr><td>Sprawność</td><td>Niska (~25%)</td><td>Wysoka (do 95% klasa D)</td></tr>
+<tr><td>Trwałość</td><td>Lampy się zużywają</td><td>Bardzo trwałe</td></tr>
+<tr><td>Cena/masa</td><td>Drogie, ciężkie</td><td>Tanie, lekkie</td></tr>
+<tr><td>Zastosowanie</td><td>Gitara, studio, audiofil</td><td>PA, monitoring, Hi-Fi</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">79</span><span class="qt">Moc znamionowa – co to jest, jednostka, pomiar</span></div>
+<div class="qa"><div class="ans"><ul><li>Moc przy której wzmacniacz/głośnik pracuje <strong>trwale bez uszkodzeń i zniekształceń</strong></li><li>Jednostka: <strong>W (wat)</strong></li><li>Pomiar wg normy (np. IEC 268-5: 100h ciągłej pracy sygnałem testowym)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">80</span><span class="qt">Muzyczna moc wyjściowa – co to jest, pomiar</span></div>
+<div class="qa"><div class="ans"><ul><li>Moc chwilowa przy krótkotrwałym sygnale muzycznym (impulsy)</li><li>Liczbowo <strong>20–100% wyższa</strong> niż znamionowa</li><li>Mierzona: przebieg sinusoidalny 250 Hz włączany na <strong>2 sekundy</strong></li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">81</span><span class="qt">Pasmo przenoszenia wzmacniacza – co to jest, jednostka, pomiar</span></div>
+<div class="qa"><div class="ans"><ul><li>Zakres częstotliwości, które wzmacniacz przenosi z odchyłką ≤ 3 dB od wartości referencyjnej (1 kHz)</li><li>Jednostka: <strong>Hz</strong></li><li>Pomiar: przy nominalnej mocy, szum biały lub sweep, odczyt –3 dB punktów</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">82</span><span class="qt">Zniekształcenia nieliniowe – co to jest, jednostka, pomiar</span></div>
+<div class="qa"><div class="ans"><ul><li>Harmoniczne składowe dodane do sygnału przez nieliniowość układu</li><li>Wyrażane jako <strong>THD (Total Harmonic Distortion)</strong> w %</li><li>Pomiar: ton sinusoidalny → analiza widmowa → stosunek mocy harmonicznych do mocy podstawowej</li><li>Przykład: THD &lt;0,01% – hi-fi, THD ~5% – wzmacniacz gitarowy „z charakterem"</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">83</span><span class="qt">Impedancja wejściowa wzmacniacza – co to jest, wpływ na działanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Impedancja jaką wzmacniacz „widzi" od strony źródła sygnału</li><li>Powinna być <strong>znacznie wyższa</strong> niż impedancja wyjściowa źródła (zasada dopasowania napięciowego)</li><li>Zbyt niska → tłumienie sygnału, utrata wysokich częstotliwości</li><li>Typowe wartości: wejście liniowe 10–50 kΩ; wejście mikrofonowe 1–3 kΩ</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">86</span><span class="qt">Klasa A – zasada, sprawność, wady/zalety, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Tranzystor/lampa <strong>przewodzi przez cały cykl</strong> sygnału (stały prąd spoczynkowy)</li><li>Sprawność: ~<strong>25–30%</strong></li><li>Zalety: bardzo małe zniekształcenia, liniowość</li><li>Wady: duże wydzielanie ciepła, nieefektywny</li><li>Zastosowanie: audiofilia, wzmacniacze słuchawkowe, preampy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">87</span><span class="qt">Klasa B – zasada, sprawność, wady/zalety</span></div>
+<div class="qa"><div class="ans"><ul><li>Dwa tranzystory, każdy przewodzi przez <strong>połowę cyklu</strong> (brak prądu spoczynkowego)</li><li>Sprawność: ~<strong>78,5%</strong></li><li>Zalety: wysoka sprawność</li><li>Wady: <strong>zniekształcenia crossover</strong> przy przejściu przez zero</li><li>W czystej postaci rzadko stosowana</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">88</span><span class="qt">Klasa AB – zasada, sprawność, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Kompromis A i B: mały prąd spoczynkowy eliminuje zniekształcenia crossover</li><li>Sprawność: ~<strong>55–70%</strong></li><li>Zalety: niskie zniekształcenia + dobra sprawność</li><li>Zastosowanie: <strong>większość wzmacniaczy audio</strong> (PA, hi-fi, monitory)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">89</span><span class="qt">Klasa D – zasada, sprawność, wady/zalety</span></div>
+<div class="qa"><div class="ans"><ul><li>Tranzystory pracują jako <strong>przełączniki</strong> (PWM – modulacja szerokości impulsów)</li><li>Sprawność: ~<strong>85–95%</strong></li><li>Zalety: lekki, mały, wydajny, mało ciepła</li><li>Wady: wymaga filtru wyjściowego LC, wrażliwość na impedancję obciążenia</li><li>Zastosowanie: nowoczesne PA, subwoofery, wzmacniacze przenośne</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">90</span><span class="qt">Klasa G – zasada, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Wiele szyn zasilania (np. 2–3 różne napięcia)</li><li>Układ przełącza na wyższe napięcie dopiero gdy sygnał tego wymaga</li><li>Sprawność wyższa niż AB, szczególnie przy sygnałach muzycznych (duża dynamika)</li><li>Zastosowanie: wzmacniacze PA średniej klasy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">91</span><span class="qt">Klasa H – zasada, zastosowanie</span></div>
+<div class="qa"><div class="ans"><ul><li>Napięcie zasilania <strong>zmienia się ciągle</strong> śledząc obwiednię sygnału wyjściowego</li><li>Podobna do G, ale płynna modulacja zamiast skokowej</li><li>Bardzo wysoka sprawność przy muzyce</li><li>Zastosowanie: profesjonalne wzmacniacze PA</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#1a1200;color:#f59e0b">94</span><span class="qt">Impedancja wyjściowa wzmacniacza – metody połączenia głośnik-wzmacniacz</span></div>
+<div class="qa"><div class="ans"><ul><li>Impedancja wyjściowa wzmacniacza powinna być <strong>znacznie niższa</strong> niż impedancja głośnika (dopasowanie napięciowe)</li><li>Metody połączenia: szeregowe, równoległe, szeregowo-równoległe</li><li>Uwaga: przy połączeniach przestrzegać <strong>minimalnej impedancji</strong> dopuszczonej przez wzmacniacz</li></ul></div></div></div>
+</div>
+
+<!-- ═══ MIKROFONY ═══ -->
+<div id="mikro" class="sec">
+<div class="sec-hdr" style="background:var(--wa);border-color:var(--ws)"><h2 style="color:var(--ws)">Mikrofony – parametry i budowa</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">95</span><span class="qt">SPL dla mikrofonu – co to jest, jednostka, przykładowe wartości</span></div>
+<div class="qa"><div class="ans"><ul><li>Maksymalne ciśnienie akustyczne jakie mikrofon może przenieść bez zniekształceń (&lt;1% THD lub &lt;0,5% dla pojemnościowych)</li><li>Jednostka: <strong>dB SPL</strong></li><li>Typowe wartości: do 150 dB SPL (nowoczesne mikrofony mają –10 dB pad)</li><li>Przykład: trąbka ff z 10 cm = 134 dB; rozmowa = 60–70 dB</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">96</span><span class="qt">Impedancja źródła mikrofonu – jednostka, wpływ na podłączenie</span></div>
+<div class="qa"><div class="ans"><ul><li>Impedancja wewnętrzna przetwornika; jednostka: <strong>Ω (om)</strong>, podawana przy 1 kHz</li><li>Zakres: 200 Ω (niskooporowe) – 150 kΩ (wysokooporowe)</li><li>Mikrofony <strong>niskooporowe preferowane</strong> – długie kable bez strat HF</li><li>Wysokooporowe + długi kabel → utrata wysokich częstotliwości</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">98</span><span class="qt">Jak producent podaje zakres częstotliwości mikrofonu i jak go mierzy?</span></div>
+<div class="qa"><div class="ans"><ul><li>Jako wykres charakterystyki częstotliwościowej (pasmo przenoszenia)</li><li>Idealne: płaskie od początku do końca</li><li>W praktyce niemożliwe – stąd stosuje się filtry górnoprzepustowe (HPF)</li><li>Pomiar: sygnał tonowy o zmiennej częstotliwości + poziomomierz, odczyt przy –3 dB lub –10 dB od wartości przy 1 kHz</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">99</span><span class="qt">Szum własny mikrofonu – jednostka</span></div>
+<div class="qa"><div class="ans"><ul><li>Poziom napięcia na wyjściu mikrofonu mierzony w warunkach <strong>totalnej ciszy</strong></li><li>Jednostka: <strong>dB(A) EIN</strong> (Equivalent Input Noise)</li><li>Im niższy → lepszy mikrofon (np. 6 dB(A) = bardzo cichy; 20 dB(A) = standardowy)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">100</span><span class="qt">Mikrofon ciśnieniowy – zasada działania i konstrukcja</span></div>
+<div class="qa"><div class="ans"><ul><li>Membrana aktywna <strong>tylko od jednej strony</strong> – tył zamknięty w sztywnej obudowie</li><li>Reaguje na ciśnienie akustyczne (nie na gradient)</li><li>Charakterystyka <strong>dookolna (omni)</strong></li><li>Brak efektu zbliżeniowego</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">101</span><span class="qt">Mikrofon gradientowy – zasada działania i konstrukcja</span></div>
+<div class="qa"><div class="ans"><ul><li>Membrana otwarta z <strong>obu stron</strong> na działanie fali</li><li>Reaguje na <strong>różnicę ciśnień</strong> (gradient) po obu stronach membrany</li><li>Charakterystyka <strong>ósemkowa (figure-8)</strong></li><li>Silny efekt zbliżeniowy</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">102</span><span class="qt">Mikrofon ciśnieniowo-gradientowy – zasada działania</span></div>
+<div class="qa"><div class="ans"><ul><li>Kombinacja ciśnieniowego i gradientowego – membrana częściowo otwarta z tyłu</li><li>Sumowanie obu odpowiedzi daje charakterystykę <strong>kardioidalną</strong> (lub pokrewną)</li><li>Im więcej gradientu → węższa charakterystyka (superkardioidalna, hiperkardioidalna)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">107</span><span class="qt">Charakterystyka Shotgun – zasada, 2 modele</span></div>
+<div class="qa"><div class="ans"><ul><li>Bardzo wąska charakterystyka z przodu – rurka interferencji (otwory boczne znoszą fale z boków)</li><li>Mała tendencja do zbierania z tyłu i boków</li><li>Wąskie pasmo, trudno uzyskać bas</li><li>Zastosowanie: teatry, TV, nagrania plenerowe z dużej odległości</li><li>Modele: <strong>Sennheiser MKH416</strong>, <strong>Rode NTG3</strong></li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">110</span><span class="qt">Mikrofon stykowy – budowa, zasada działania</span></div>
+<div class="qa"><div class="ans"><ul><li>Przyklejany lub przyciskany bezpośrednio do powierzchni instrumentu</li><li>Reaguje na drgania mechaniczne (nie powietrzne)</li><li>Typ: pojemnościowy kontaktowy lub piezoelektryczny</li><li>Przykład: AKG C411 – stosowany na fortepianie, kontrabasie, harfie</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">112</span><span class="qt">Mikrofon elektretowy – budowa, zasada działania</span></div>
+<div class="qa"><div class="ans"><ul><li>Odmiana pojemnościowego – membrana lub płytka tylna trwale naelektryzowana (elektret)</li><li>Nie wymaga polaryzacji zewnętrznej</li><li>Zasilanie: <strong>Bias (5–9V)</strong> lub phantom dla wbudowanego przedwzmacniacza</li><li>Tani, miniaturowy – stosowany w lavalierach, telefonach, kamerach</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">113</span><span class="qt">Mikrofon wstęgowy – budowa, zasada działania, parametry</span></div>
+<div class="qa"><div class="ans"><ul><li>Cienka folia aluminiowa (wstążka) napięta między biegunami magnesu</li><li>Prąd indukowany w wstążce przez ruch w polu magnetycznym</li><li>Charakterystyka <strong>ósemkowa</strong>, ciepłe brzmienie, wrażliwy na podmuchy!</li><li>Wymaga transformatora (impedancja wstążki ~0,1 Ω)</li><li>Przykłady: Royer R-121, Coles 4038, Beyerdynamic M160</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">114</span><span class="qt">Mikrofon pojemnościowy – budowa, zasada działania</span></div>
+<div class="qa"><div class="ans"><ul><li>Membrana + płytka tylna = kondensator</li><li>Ruch membrany zmienia pojemność → zmiana napięcia na wyjściu</li><li>Wymaga <strong>zasilania phantom 48V</strong> (lub Tonader 12V)</li><li>Szersze pasmo, wyższa czułość niż dynamiczny, ale droższy i mniej odporny</li><li>Małomembranowy: lepsze HF, lepsza charakterystyka kier.; wielkomembranowy: ciepłe brzmienie, niższy szum</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">115</span><span class="qt">Mikrofon dynamiczny – budowa, zasada działania</span></div>
+<div class="qa"><div class="ans"><ul><li>Membrana + cewka drgająca (karkas z uzwojeniem) w polu magnesu stałego</li><li>Ruch membrany → ruch cewki w polu → prąd indukcji elektromagnetycznej</li><li>Nie wymaga zasilania, odporny, znosi wysokie SPL</li><li>Przykłady: Shure SM57/SM58, Sennheiser MD-421</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">116</span><span class="qt">Phantom, Tonader, Bias – podaj jednostki i wartości</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th>Typ</th><th>Napięcie</th><th>Zastosowanie</th></tr>
+<tr><td><strong>Phantom</strong></td><td>48V DC (±4V)</td><td>Mikrofony pojemnościowe, standard XLR</td></tr>
+<tr><td><strong>Tonader</strong></td><td>12V DC</td><td>Starszy standard DIN (T-zasilanie)</td></tr>
+<tr><td><strong>Bias</strong></td><td>5–9V DC</td><td>Mikrofony elektretowe (minijack, kamera)</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">117</span><span class="qt">Wielko- vs małomembranowe – wady i zalety</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>Wielkomembranowe (&gt;3/4")</th><th>Małomembranowe (&lt;1/2")</th></tr>
+<tr><td>Brzmienie</td><td>Ciepłe, koloryzujące</td><td>Neutralne, dokładne</td></tr>
+<tr><td>Szum własny</td><td>Niższy (lepsze)</td><td>Wyższy</td></tr>
+<tr><td>Charakterystyka kier.</td><td>Gorsza na HF</td><td>Bardziej stała w całym paśmie</td></tr>
+<tr><td>Zastosowanie</td><td>Wokal, akustyk, studio</td><td>Overheady, instrumenty, AB stereo</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">118</span><span class="qt">Mikrofon z przełączalną charakterystyką kierunkową – budowa i zasada</span></div>
+<div class="qa"><div class="ans"><ul><li>Dwie membrany (kapsułki) ustawione tyłem do siebie</li><li>Zmiana charakterystyki przez regulację polaryzacji tylnej kapsułki: pełna polaryzacja = ósemka; brak = omni; połowa = kardioidalna</li><li>Przykłady: AKG C414, Neumann U87, Shure KSM44A, Lewitt LCT 441 FLEX</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:var(--ws)">122</span><span class="qt">Efekt zbliżeniowy – kiedy i w jakich mikrofonach występuje</span></div>
+<div class="qa"><div class="ans"><ul><li>Wzrost poziomu niskich częstotliwości przy zbliżeniu źródła do mikrofonu</li><li>Występuje wyłącznie w mikrofonach <strong>kierunkowych</strong> (kardioidalnych i pokrewnych)</li><li>Silniejszy im węższa charakterystyka (hiperkard &gt; superkard &gt; kard)</li><li><strong>W mikrofonach dookolnych (omni) NIE występuje</strong></li><li>Im dalej źródło od mikrofonu → mniej basów</li></ul></div></div></div>
+</div>
+
+<!-- ═══ TECHNIKI MIKROFONOWE ═══ -->
+<div id="tech" class="sec">
+<div class="sec-hdr" style="background:var(--wa);border-color:#38bdf8"><h2 style="color:#38bdf8">Techniki mikrofonowe (2. rok)</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:#38bdf8">119</span><span class="qt">Technika XY – ustawienie, wady i zalety</span></div>
+<div class="qa"><div class="ans"><ul><li>Kapsułki dotykają się / nałożone na siebie, obrót <strong>90–120°</strong> między mikrofonami</li><li>Technika <strong>natężeniowa</strong> – brak różnicy czasu (mono-kompatybilna!)</li><li>Mikrofony: kardioidalne lub pokrewne, <strong>tylko pojemnościowe</strong></li><li>Zalety: pełna kompatybilność mono, łatwe ustawienie</li><li>Wady: węższe stereo niż AB, mniejsza głębokość przestrzeni</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:#38bdf8">120</span><span class="qt">Technika MS (Mid-Side) – ustawienie, wady i zalety</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Mid</strong>: mikrofon kardioidalny skierowany na wprost na źródło</li><li><strong>Side</strong>: mikrofon ósemkowy (figure-8) prostopadle</li><li>Technika natężeniowa – wszystko w jednym miejscu</li><li>Dekodowanie: L = M + S, R = M – S</li><li>Zalety: regulacja szerokości stereo po nagraniu, idealna mono-kompatybilność</li><li>Wady: wymaga dekodowania MS</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:#38bdf8">121</span><span class="qt">Technika AB (Spaced Pair) – ustawienie, wady i zalety</span></div>
+<div class="qa"><div class="ans"><ul><li>Dwa identyczne mikrofony do <strong>1 m od siebie</strong> (najlepiej fabryczny dobór parowy)</li><li>Charakterystyka: kardioidalna, subkardioidalna lub dookolna</li><li>Technika <strong>natężeniowo-fazowa</strong></li><li>Zalety: szerokie stereo, naturalna przestrzeń, głębokość</li><li>Wady: <strong>problemy przy monofonizacji</strong> (wycinanie częstotliwości z powodu opóźnień)</li><li>Pary AB nie equalizujemy! Można podciąć góry ale ostrożnie</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:#38bdf8">—</span><span class="qt">ORTF, NOS, Faulkner – parametry</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th>Technika</th><th>Odległość</th><th>Kąt</th><th>Mikrofony</th></tr>
+<tr><td><strong>ORTF</strong></td><td>30 cm</td><td>90°</td><td>Kardioidalne</td></tr>
+<tr><td><strong>NOS</strong></td><td>17 cm</td><td>110°</td><td>Kardioidalne</td></tr>
+<tr><td><strong>Faulkner</strong></td><td>20 cm</td><td>0° (równoległe)</td><td>Dwa ósemkowe</td></tr>
+</table>
+Wszystkie techniki natężeniowo-fazowe – <strong>nie można monofonizować</strong>!</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:var(--wa);color:#38bdf8">—</span><span class="qt">Decca Tree, Polyhymnia Pentagon, Fukada Tree</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th>Technika</th><th>Charakterystyka</th></tr>
+<tr><td><strong>Decca Tree</strong></td><td>3 mikrofony dookolne w kształcie litery T (Decca Records)</td></tr>
+<tr><td><strong>Polyhymnia Pentagon</strong></td><td>5 mikrofonów dookolnych; dobra separacja; rozmieszczenie wg ITU 775 (jak monitory 5.1)</td></tr>
+<tr><td><strong>Fukada Tree</strong></td><td>Nagrania muzyki klasycznej (chóry, orkiestry); duże odległości między mikrofonami; szerokie źródła</td></tr>
+</table></div></div></div>
+</div>
+
+<!-- ═══ BEZPRZEWODOWE ═══ -->
+<div id="bezprz" class="sec">
+<div class="sec-hdr" style="background:#2d1000;border-color:#f97316"><h2 style="color:#f97316">Systemy bezprzewodowe (2. rok)</h2></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">124</span><span class="qt">Squelch – co to jest?</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Bramka szumowa na odbiorniku radiowym</strong> – wycina sygnały poniżej progu (szumy przy braku sygnału)</li><li>To NIE jest bramka szumu – nie odcina konkretnych częstotliwości</li><li>Eliminuje ciche tło gdy nadajnik jest poza zasięgiem → cisza zamiast szumu</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">125</span><span class="qt">Trzecie częstotliwości harmoniczne w układach nadawczych – co to i jak obliczać?</span></div>
+<div class="qa"><div class="ans"><ul><li>Harmoniczne to wielokrotności częstotliwości podstawowej generowane przez nieliniowość nadajnika</li><li>3. harmoniczna = <strong>3 × f</strong> (np. 600 MHz → 3. harm. = 1800 MHz)</li><li>Mogą zakłócać inne systemy i urządzenia pracujące na tych częstotliwościach</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">126</span><span class="qt">Non-Diversity vs Diversity – różnice, wady i zalety</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th></th><th>Non-Diversity</th><th>Diversity</th></tr>
+<tr><td>Anteny</td><td>1</td><td>2 (lub więcej)</td></tr>
+<tr><td>Dobieranie sygnału</td><td>Brak przełączania</td><td>Odbiornik wybiera lepszą antenę</td></tr>
+<tr><td>Martwe strefy</td><td>Tak</td><td>Minimalizowane</td></tr>
+<tr><td>Cena</td><td>Tańszy</td><td>Droższy</td></tr>
+<tr><td>Zastosowanie</td><td>Małe zastosowania, studio</td><td>Profesjonalne eventy, scena</td></tr>
+</table></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">127</span><span class="qt">Dopuszczalne moce nadajników bezprzewodowych w Polsce – kto nadzoruje?</span></div>
+<div class="qa"><div class="ans"><ul><li>Nadzoruje: <strong>UKE</strong> – Urząd Komunikacji Elektronicznej (wg Rozporządzenia Ministra Cyfryzacji z 9.02.2022r.)</li><li>Optymalna moc pracy: <strong>10 mW</strong></li><li>Zwiększony zasięg: <strong>50 mW</strong></li><li>Dozwolone częstotliwości w Polsce: <strong>470–694 MHz</strong></li><li>Konsekwencje naruszenia: grzywna, konfiskata, do 2 lat pozbawienia wolności</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">128</span><span class="qt">Wpływ szerokości pasma radiowego na jakość sygnału audio</span></div>
+<div class="qa"><div class="ans"><ul><li>Szersze pasmo → lepsza jakość, niższe zniekształcenia, niższa latencja</li><li>Węższe pasmo → konieczność kompresji sygnału audio, większa latencja</li><li>Minimalny odstęp między kanałami: <strong>0,3–1,5 MHz</strong> (WMAS)</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">129</span><span class="qt">Kolejne bloki przetwarzania sygnału: audio → radio → audio (system analogowy)</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Nadajnik</strong>: mikrofon → przedwzmacniacz → kompresor/expander → modulator (FM/AM) → wzmacniacz mocy RF → antena</li><li><strong>Odbiornik</strong>: antena → filtr bandpass → demodulator → expander → wzmacniacz audio → wyjście XLR</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">130</span><span class="qt">3 sposoby łączenia sygnałów antenowych wielu odbiorników</span></div>
+<div class="qa"><div class="ans"><ul><li><strong>Pasywny splitter antenowy</strong> – prosta dystrybucja, straty sygnału przy każdym podziale</li><li><strong>Aktywny dystrybutor antenowy</strong> – wzmacnia sygnał przed podziałem (zazwyczaj 4×A + 4×B)</li><li><strong>Kaskada</strong> – jeden odbiornik wchodzi w drugi (kolejny w trzeci), ostateczna opcja gdy brak dystrybutora</li></ul></div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">—</span><span class="qt">IEM (In-Ear Monitor) – tryby pracy</span></div>
+<div class="qa"><div class="ans">
+<table class="cmp"><tr><th>Tryb</th><th>Opis</th></tr>
+<tr><td><strong>Stereo</strong></td><td>Kanał 1 → słuchawka lewa, kanał 2 → prawa</td></tr>
+<tr><td><strong>Mono</strong></td><td>Kanał 1 lub 2 słyszany w obu słuchawkach jednocześnie</td></tr>
+<tr><td><strong>Focus</strong></td><td>Słuchacz samodzielnie ustala proporcje między kanałami</td></tr>
+</table>
+IEM traktujemy jako system dwukanałowy. Kilka systemów nadawczych IEM łączymy w jeden system nadawczy (nigdy bez 2 anten).</div></div></div>
+
+<div class="q"><div class="q-top" onclick="t(this)"><span class="qn" style="background:#2d1000;color:#f97316">—</span><span class="qt">Anteny – ważne zasady pracy</span></div>
+<div class="qa"><div class="ans"><ul><li>Anteny mają <strong>polaryzację</strong> – nadawcza i odbiorcza muszą być zgodne</li><li>Minimalna długość anteny: <strong>¼ długości fali</strong>; optymalna: pełna fala</li><li>Wzór: <strong>C = L × F</strong> (długość fali = prędkość światła / częstotliwość)</li><li>Nie stawiać anten jak „jeż" (jedna nad drugą w tej samej osi)</li><li>Minimalna odległość między włączonymi nadajnikami: <strong>20 cm</strong></li><li>Przy wątpliwym zasięgu na próbie – na evencie będzie gorzej (ludzie z urządzeniami)</li></ul></div></div></div>
+</div>
+
+</div><!-- /wrap -->
+<script>
+function t(el){
+  const a=el.nextElementSibling;
+  a.classList.toggle('open');
+}
+function search(v){
+  const q=v.toLowerCase();
+  document.querySelectorAll('.q').forEach(el=>{
+    el.classList.toggle('hidden', q.length>0 && !el.textContent.toLowerCase().includes(q));
+  });
+}
+</script>
+</body>
+</html>
