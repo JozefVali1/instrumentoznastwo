@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mikrofony wg Charakterystyki – Elektroakustyka</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #22263a;
+    --border: #2e3350;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --dim: #60697a;
+
+    --kard: #3b82f6;
+    --kard-bg: #0f1e3a;
+    --super: #10b981;
+    --super-bg: #0a2218;
+    --hiper: #f59e0b;
+    --hiper-bg: #2a1d08;
+    --omni: #a855f7;
+    --omni-bg: #1e0f33;
+    --osem: #ef4444;
+    --osem-bg: #2a0d0d;
+    --multi: #06b6d4;
+    --multi-bg: #06202a;
+    --gran: #f97316;
+    --gran-bg: #2a1000;
+
+    --dyn: #64748b;
+    --dyn-bg: #12181f;
+    --cond: #7c3aed;
+    --cond-bg: #180e2e;
+    --rib: #be185d;
+    --rib-bg: #25071a;
+
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: #0c0e18; border-bottom: 1px solid var(--border); padding: 10px 20px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  nav span.label { font-weight: 700; font-size: 12px; color: var(--muted); margin-right: 4px; white-space: nowrap; }
+  nav a { padding: 4px 11px; border-radius: 20px; font-size: 12px; font-weight: 700; text-decoration: none; border: 1px solid; transition: all 0.15s; white-space: nowrap; }
+  .nk { border-color: var(--kard); color: var(--kard); }
+  .ns { border-color: var(--super); color: var(--super); }
+  .nh { border-color: var(--hiper); color: var(--hiper); }
+  .no { border-color: var(--omni); color: var(--omni); }
+  .n8 { border-color: var(--osem); color: var(--osem); }
+  .nm { border-color: var(--multi); color: var(--multi); }
+  .ng { border-color: var(--gran); color: var(--gran); }
+  .nt { border-color: var(--border); color: var(--text); }
+  nav a:hover { filter: brightness(1.3); }
+
+  /* LAYOUT */
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 28px 20px 80px; }
+  h1 { font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: var(--muted); margin-bottom: 36px; font-size: 13px; }
+
+  /* PATTERN SECTION */
+  .pat-section { margin-bottom: 44px; }
+  .pat-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 14px 20px; border-radius: var(--radius); border-left: 5px solid; }
+  .pat-header h2 { font-size: 20px; font-weight: 800; }
+  .pat-header .pl { font-size: 13px; color: var(--muted); margin-top: 1px; }
+  .pat-header .count-badge { margin-left: auto; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+
+  /* DIAGRAM */
+  .diagram { font-size: 11px; font-family: monospace; line-height: 1.3; margin-bottom: 6px; }
+
+  /* TYPE GROUPS */
+  .type-group { margin-bottom: 10px; }
+  .type-label { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
+  .type-dyn { background: var(--dyn-bg); color: #94a3b8; border: 1px solid #2a3040; }
+  .type-cond { background: var(--cond-bg); color: #a78bfa; border: 1px solid #3b2070; }
+  .type-rib { background: var(--rib-bg); color: #f472b6; border: 1px solid #7c1048; }
+
+  /* MIC TABLE */
+  .mic-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .mic-table tr { border-bottom: 1px solid var(--border); }
+  .mic-table tr:last-child { border-bottom: none; }
+  .mic-table tr:hover td { background: rgba(255,255,255,0.025); }
+  .mic-table td { padding: 7px 12px; vertical-align: middle; }
+  .mic-table td:first-child { font-weight: 700; color: var(--text); min-width: 220px; }
+  .mic-table td:nth-child(2) { color: var(--muted); font-size: 12.5px; }
+  .mic-table td:last-child { color: var(--dim); font-size: 12px; text-align: right; white-space: nowrap; }
+  .star { color: #fbbf24; font-size: 11px; margin-left: 4px; }
+
+  /* GRID FOR TYPE GROUPS */
+  .groups-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .group-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .group-card-inner { padding: 6px 0; }
+
+  /* MULTI-PATTERN TABLE */
+  .multi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .multi-table th { background: var(--bg3); color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 7px 12px; text-align: left; }
+  .multi-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .multi-table tr:last-child td { border-bottom: none; }
+  .multi-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .multi-table td:first-child { font-weight: 700; min-width: 200px; }
+  .pat-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 8px; margin: 1px; }
+  .pp-k { background: #0f1e3a; color: var(--kard); border: 1px solid var(--kard); }
+  .pp-s { background: #0a2218; color: var(--super); border: 1px solid var(--super); }
+  .pp-h { background: #2a1d08; color: var(--hiper); border: 1px solid var(--hiper); }
+  .pp-o { background: #1e0f33; color: var(--omni); border: 1px solid var(--omni); }
+  .pp-8 { background: #2a0d0d; color: var(--osem); border: 1px solid var(--osem); }
+  .pp-sub { background: #1a1a2e; color: #818cf8; border: 1px solid #818cf8; }
+
+  /* LOOKUP TABLE */
+  #lookup { scroll-margin-top: 60px; }
+  .lookup-search { width: 100%; padding: 10px 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; margin-bottom: 14px; outline: none; }
+  .lookup-search:focus { border-color: var(--kard); }
+  .lookup-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .lookup-table th { background: var(--bg3); color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; position: sticky; top: 42px; }
+  .lookup-table td { padding: 7px 12px; border-bottom: 1px solid #1e2236; vertical-align: middle; }
+  .lookup-table tr:hover td { background: rgba(255,255,255,0.025); }
+  .lookup-table td:first-child { font-weight: 700; }
+  .lookup-table td:nth-child(2) { font-size: 12px; }
+  .lookup-table td:nth-child(3) { font-size: 12px; }
+  .lookup-table td:last-child { font-size: 12px; color: var(--dim); }
+  .lookup-row { }
+  .lookup-row.hidden { display: none; }
+
+  /* NOTES */
+  .note { background: #1a1200; border: 1px solid #92400e; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #fbbf24; margin-top: 10px; }
+  .note::before { content: '⚠ '; }
+
+  /* SECTION SCROLL */
+  .pat-section { scroll-margin-top: 55px; }
+
+  /* COLOR HELPERS for pat-header */
+  .ph-k { background: var(--kard-bg); border-color: var(--kard); }
+  .ph-s { background: var(--super-bg); border-color: var(--super); }
+  .ph-h { background: var(--hiper-bg); border-color: var(--hiper); }
+  .ph-o { background: var(--omni-bg); border-color: var(--omni); }
+  .ph-8 { background: var(--osem-bg); border-color: var(--osem); }
+  .ph-m { background: var(--multi-bg); border-color: var(--multi); }
+  .ph-g { background: var(--gran-bg); border-color: var(--gran); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 16px 0 12px; }
+  @media (max-width: 600px) { .mic-table td:last-child { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="label">CHARAKTERYSTYKI</span>
+  <a class="nk" href="#kardioid">Kardioidalna</a>
+  <a class="ns" href="#superkardioid">Superkardioidalna</a>
+  <a class="nh" href="#hiperkardioid">Hiperkardioidalna</a>
+  <a class="no" href="#omni">Dookolna</a>
+  <a class="n8" href="#osemka">Ósemkowa</a>
+  <a class="nm" href="#multi">Wielomembranowe</a>
+  <a class="ng" href="#graniczne">Graniczne</a>
+  <a class="nt" href="#lookup">🔍 Lookup</a>
+</nav>
+
+<div class="wrap">
+  <h1>Mikrofony według Charakterystyki</h1>
+  <p class="subtitle">Elektroakustyka – Egzamin &nbsp;|&nbsp; Źródło: IiAM Mikrofonizacja &nbsp;|&nbsp; ★ = szczególnie ważne</p>
+
+  <!-- ══════════════════════════ KARDIOIDALNA ══════════════════════════ -->
+  <div id="kardioid" class="pat-section">
+    <div class="pat-header ph-k">
+      <div>
+        <h2 style="color: var(--kard)">Kardioidalna</h2>
+        <div class="pl">Zbiera dźwięk z przodu, odrzuca z tyłu (180°). Kształt przypomina serce.</div>
+      </div>
+      <div class="count-badge" style="background:var(--kard-bg);color:var(--kard);border:1px solid var(--kard)">~40 mikrofonów</div>
+    </div>
+
+    <div class="groups-grid">
+      <!-- DYNAMICZNE KARDIOIDALNE -->
+      <div class="group-card">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-dyn">⚡ Dynamiczne</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Shure SM57 ★</td><td>Large diaphragm</td><td>40 Hz – 15 kHz</td></tr>
+            <tr><td>Shure SM7B ★</td><td>Large diaphragm</td><td>50 Hz – 20 kHz</td></tr>
+            <tr><td>Sennheiser MD-421 MKII ★</td><td>Large diaphragm</td><td>30 – 17 kHz</td></tr>
+            <tr><td>Sennheiser E 604</td><td>Large diaphragm</td><td>40 Hz – 18 kHz</td></tr>
+            <tr><td>Sennheiser E 904</td><td>Large diaphragm</td><td>40 – 18 000 Hz</td></tr>
+            <tr><td>Sennheiser E 902</td><td>Large diaphragm</td><td>20 – 18 000 Hz</td></tr>
+            <tr><td>Sennheiser E 602 II</td><td>Large diaphragm</td><td>20 – 16 000 Hz</td></tr>
+            <tr><td>AKG D112 MKII ★</td><td>Large diaphragm</td><td>20 – 17 kHz</td></tr>
+            <tr><td>AKG D12 VR</td><td>Large diaphragm</td><td>17 Hz – 17 kHz</td></tr>
+            <tr><td>AKG P2</td><td>Large diaphragm</td><td>20 – 16 000 Hz</td></tr>
+            <tr><td>Electro-Voice RE20 ★</td><td>Variable-D, Large diaphragm</td><td>45 Hz – 18 000 Hz</td></tr>
+            <tr><td>Electro-Voice RE320</td><td>Large diaphragm</td><td>30 – 18 000 Hz</td></tr>
+            <tr><td>Audix D6</td><td>Large diaphragm</td><td>30 Hz – 15 kHz</td></tr>
+            <tr><td>Audix i-5</td><td>Large diaphragm (23mm)</td><td>50 Hz – 16 kHz</td></tr>
+            <tr><td>Audix i-9</td><td>Large diaphragm (23mm)</td><td>30 – 18 kHz</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- POJEMNOŚCIOWE KARDIOIDALNE – MAŁE MEMBRANY -->
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-cond">◉ Pojemnościowe – Mała membrana</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Neumann KM184 ★</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Shure SM81 ★</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>AKG C 451B ★</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Rode NT5</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Lewitt LCT 040</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Lewitt LCT 140</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Shure Beta 98 AD/C</td><td>Small diaphragm, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica Pro 37</td><td>Small diaphragm</td><td>30 – 15 000 Hz</td></tr>
+            <tr><td>Earthworks SR30</td><td>Small diaphragm</td><td>20 Hz – 20 kHz</td></tr>
+            <tr><td>Earthworks Audio DM20</td><td>Small diaphragm</td><td>20 Hz – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser E 914</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>AKG P 170</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Shure KSM 137 ★</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>SE Electronics SE8</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica AT4041</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica 4051B</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audix ADX 51</td><td>Small diaphragm</td><td>40 – 20 000 Hz</td></tr>
+            <tr><td>DPA 4011</td><td>Small diaphragm, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>DPA 4011A</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Schoeps MK4 ★</td><td>Small diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica ATM350</td><td>Small diaphragm, clip-on</td><td>30 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica ATM 490</td><td>Small diaphragm</td><td>40 – 20 000 Hz</td></tr>
+            <tr><td>AKG C 214</td><td>Large dual-diaphragm</td><td>20 – 20 000 Hz</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- POJEMNOŚCIOWE KARDIOIDALNE – DUŻE MEMBRANY -->
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-cond">◉ Pojemnościowe – Duża membrana</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Neumann TLM 102 ★</td><td>Large diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Neumann TLM 103 ★</td><td>Large diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Neumann U47 FET</td><td>Large diaphragm</td><td>40 – 16 000 Hz</td></tr>
+            <tr><td>Rode NT1-A ★</td><td>Large diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Rode NT55</td><td>Small diaphragm (+ kapsuła Omni)</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica AT-4060</td><td>Large diaphragm (lampowy)</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Beyerdynamic MC-930</td><td>Small diaphragm</td><td>40 Hz – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser MK4</td><td>Large diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Universal Audio SP-1</td><td>Large diaphragm</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Neumann MCM 114</td><td>Miniature, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audix ADX 20</td><td>Miniature, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Audio-Technica ATM360</td><td>Clip-on</td><td>30 – 20 000 Hz</td></tr>
+            <tr><td>Shure Beta 98HC</td><td>Clip-on</td><td>20 Hz – 20 kHz</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ SUPERKARDIOIDALNA ══════════════════════════ -->
+  <div id="superkardioid" class="pat-section">
+    <div class="pat-header ph-s">
+      <div>
+        <h2 style="color: var(--super)">Superkardioidalna</h2>
+        <div class="pl">Węższy kąt odbioru niż kardioidalna. Niewielki płatek z tyłu (~135°). Lepsza izolacja.</div>
+      </div>
+      <div class="count-badge" style="background:var(--super-bg);color:var(--super);border:1px solid var(--super)">~15 mikrofonów</div>
+    </div>
+
+    <div class="groups-grid">
+      <div class="group-card">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-dyn">⚡ Dynamiczne</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Sennheiser E 906 ★</td><td>Large diaphragm</td><td>40 Hz – 18 000 Hz</td></tr>
+            <tr><td>Shure Beta 57A ★</td><td>Large diaphragm</td><td>50 Hz – 16 000 Hz</td></tr>
+            <tr><td>Shure Beta 52A</td><td>Large diaphragm</td><td>20 Hz – 10 000 Hz</td></tr>
+            <tr><td>Shure Beta 56A</td><td>Large diaphragm</td><td>50 Hz – 16 000 Hz</td></tr>
+            <tr><td>Sennheiser MD 441-U ★</td><td>Large diaphragm</td><td>30 – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser E x609</td><td>Large diaphragm</td><td>40 – 18 000 Hz</td></tr>
+            <tr><td>Telefunken M80</td><td>Large diaphragm</td><td>50 – 18 000 Hz</td></tr>
+            <tr><td>Telefunken M81 SH</td><td>Large diaphragm</td><td>30 – 18 000 Hz</td></tr>
+            <tr><td>sE Electronics V7</td><td>Large diaphragm</td><td>40 – 19 000 Hz</td></tr>
+            <tr><td>sE Electronics V Beat</td><td>Large diaphragm</td><td>30 – 19 000 Hz</td></tr>
+            <tr><td>SE Electronics V Kick</td><td>Large diaphragm</td><td>20 Hz – 19 000 Hz</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-cond">◉ Pojemnościowe</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>DPA 4099 ★</td><td>Miniature, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser E 614</td><td>Small diaphragm</td><td>40 – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser MKH 50</td><td>Small diaphragm</td><td>40 – 20 000 Hz</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ HIPERKARDIOIDALNA ══════════════════════════ -->
+  <div id="hiperkardioid" class="pat-section">
+    <div class="pat-header ph-h">
+      <div>
+        <h2 style="color: var(--hiper)">Hiperkardioidalna</h2>
+        <div class="pl">Najwęższy kąt odbioru z przodu. Wyraźny płatek z tyłu (~105°). Najlepsza izolacja kierunkowa.</div>
+      </div>
+      <div class="count-badge" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">~7 mikrofonów</div>
+    </div>
+
+    <div class="groups-grid">
+      <div class="group-card">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-dyn">⚡ Dynamiczne</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Beyerdynamic M88TG ★</td><td>Large diaphragm</td><td>30 – 20 000 Hz</td></tr>
+            <tr><td>Beyerdynamic M201TG ★</td><td>Small diaphragm</td><td>40 – 18 000 Hz</td></tr>
+            <tr><td>Audix D2</td><td>Large diaphragm</td><td>44 – 18 000 Hz</td></tr>
+            <tr><td>Audio-Technica ATM230</td><td>Large diaphragm</td><td>30 – 12 000 Hz</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-rib">🎀 Wstążkowe (Ribbon)</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Beyerdynamic M160 ★</td><td>Ribbon, Large diaphragm (25mm)</td><td>40 Hz – 18 kHz</td></tr>
+          </table>
+          <div class="note" style="margin: 8px 12px; font-size: 12px;">Beyerdynamic M160 to jedyny popularny mikrofon wstążkowy z charakterystyką HIPERKARDIOIDALNĄ – wyjątek!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ DOOKOLNA (OMNI) ══════════════════════════ -->
+  <div id="omni" class="pat-section">
+    <div class="pat-header ph-o">
+      <div>
+        <h2 style="color: var(--omni)">Dookolna (Omnidirectional)</h2>
+        <div class="pl">Zbiera dźwięk równomiernie ze wszystkich kierunków (360°). Brak efektu bliskości.</div>
+      </div>
+      <div class="count-badge" style="background:var(--omni-bg);color:var(--omni);border:1px solid var(--omni)">~7 mikrofonów</div>
+    </div>
+
+    <div class="groups-grid">
+      <div class="group-card">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-dyn">⚡ Dynamiczne</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Shure 520DX ★</td><td>Dynamic, Large diaphragm ("Green Bullet")</td><td>100 Hz – 5 000 Hz</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-cond">◉ Pojemnościowe</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>DPA 4060 ★</td><td>Miniature, Omni, clip-on</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Sennheiser MKE 2</td><td>Miniature, Omni, lavalier</td><td>20 – 20 000 Hz</td></tr>
+            <tr><td>Shure MX183</td><td>Miniature, Omni, lavalier</td><td>20 – 20 000 Hz</td></tr>
+          </table>
+          <div class="note" style="margin: 8px 12px; font-size: 12px;">Mikrofony omni nie mają efektu bliskości – dlatego używamy ich przy instrumentach smyczkowych (skrzypce, altówka) aby uniknąć pogłębienia basów przy bliskim ustawieniu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ÓSEMKOWA (FIGURE-8) ══════════════════════════ -->
+  <div id="osemka" class="pat-section">
+    <div class="pat-header ph-8">
+      <div>
+        <h2 style="color: var(--osem)">Ósemkowa / Dwukierunkowa (Figure-8 / Bidirectional)</h2>
+        <div class="pl">Zbiera z przodu i z tyłu (0° i 180°), odrzuca z boków (90°). Dominuje w mikrofonach wstążkowych.</div>
+      </div>
+      <div class="count-badge" style="background:var(--osem-bg);color:var(--osem);border:1px solid var(--osem)">~6 mikrofonów</div>
+    </div>
+
+    <div class="groups-grid">
+      <div class="group-card">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-rib">🎀 Wstążkowe (Ribbon) – NAJCZĘSTSZE</span>
+        </div>
+        <div class="group-card-inner">
+          <table class="mic-table">
+            <tr><td>Royer Labs R-121 ★</td><td>Ribbon, Figure 8</td><td>30 – 15 000 Hz</td></tr>
+            <tr><td>Royer R-10 ★</td><td>Ribbon, Figure 8</td><td>30 – 15 000 Hz</td></tr>
+            <tr><td>Coles 4038 ★</td><td>Ribbon, Figure 8</td><td>30 – 15 000 Hz</td></tr>
+            <tr><td>sE Electronics VR1</td><td>Ribbon, Figure 8</td><td>30 – 18 000 Hz</td></tr>
+          </table>
+          <div class="note" style="margin: 8px 12px; font-size: 12px;">Mikrofony wstążkowe (ribbon) mają z reguły charakterystykę ósemkową. Są czułe na mocne podmuchy – ostrożnie przy instrumentach dętych i perkusji! Beyerdynamic M160 jest wyjątkiem (hypercardioid).</div>
+        </div>
+      </div>
+
+      <div class="group-card" style="margin-top:10px">
+        <div style="padding: 10px 14px 4px">
+          <span class="type-label type-cond">◉ Pojemnościowe</span>
+        </div>
+        <div class="group-card-inner">
+          <p style="font-size:13px; color:var(--muted); padding: 10px 14px">Ósemkę oferują głównie mikrofony wielomembranowe jako jedna z trybów pracy. Zobacz sekcję <a href="#multi" style="color:var(--multi)">Wielomembranowe</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ WIELOMEMBRANOWE (MULTI-PATTERN) ══════════════════════════ -->
+  <div id="multi" class="pat-section">
+    <div class="pat-header ph-m">
+      <div>
+        <h2 style="color: var(--multi)">Wielomembranowe (Multi-pattern / Zmienna charakterystyka)</h2>
+        <div class="pl">Przełączalne charakterystyki w jednym mikrofonie. Zawsze pojemnościowe z dwiema membranami.</div>
+      </div>
+      <div class="count-badge" style="background:var(--multi-bg);color:var(--multi);border:1px solid var(--multi)">~8 mikrofonów</div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-card-inner">
+        <table class="multi-table">
+          <tr>
+            <th>Mikrofon</th>
+            <th>Dostępne charakterystyki</th>
+            <th>Membrana</th>
+          </tr>
+          <tr>
+            <td>AKG C414 ★</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-s">Superkard</span>
+              <span class="pat-pill pp-sub">Subkard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+              + pozycje pośrednie
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm (25.4mm)</td>
+          </tr>
+          <tr>
+            <td>Neumann U87 AI ★</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm</td>
+          </tr>
+          <tr>
+            <td>Shure KSM44A ★</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm</td>
+          </tr>
+          <tr>
+            <td>Lewitt LCT 441 FLEX</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-s">Superkard</span>
+              <span class="pat-pill pp-sub">Subkard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm</td>
+          </tr>
+          <tr>
+            <td>Neumann TLM 107</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-s">Superkard</span>
+              <span class="pat-pill pp-sub">Subkard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm</td>
+          </tr>
+          <tr>
+            <td>Telefunken U47 (Neumann U47) ★</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+            </td>
+            <td style="font-size:12px">Large dual-diaphragm</td>
+          </tr>
+          <tr>
+            <td>Audio-Technica AT4050</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+              <span class="pat-pill pp-8">Figure-8</span>
+            </td>
+            <td style="font-size:12px">Large diaphragm</td>
+          </tr>
+          <tr>
+            <td>Audio-Technica AE2500</td>
+            <td>
+              <span class="pat-pill pp-k">Kard (Cond)</span>
+              <span class="pat-pill pp-k">Kard (Dyn)</span>
+            </td>
+            <td style="font-size:12px">Dual element: Condenser + Dynamic (Large+Small)</td>
+          </tr>
+          <tr>
+            <td>Rode NT55</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+            </td>
+            <td style="font-size:12px">Small diaphragm, wymienne kapsuły</td>
+          </tr>
+          <tr>
+            <td>Shure KSM 141</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-o">Omni</span>
+            </td>
+            <td style="font-size:12px">Small diaphragm</td>
+          </tr>
+          <tr>
+            <td>AKG C1000s MKIV</td>
+            <td>
+              <span class="pat-pill pp-k">Kard</span>
+              <span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkard</span>
+            </td>
+            <td style="font-size:12px">Small diaphragm (nakładka)</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ GRANICZNE / BOUNDARY ══════════════════════════ -->
+  <div id="graniczne" class="pat-section">
+    <div class="pat-header ph-g">
+      <div>
+        <h2 style="color: var(--gran)">Graniczne (Boundary / PZM)</h2>
+        <div class="pl">Montowane na płaskiej powierzchni (podłoga, ściana, piano). Półkulista charakterystyka (Half-cardioid / Hemispherical). Brak efektu fali odbitej.</div>
+      </div>
+      <div class="count-badge" style="background:var(--gran-bg);color:var(--gran);border:1px solid var(--gran)">~3 mikrofony</div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-card-inner">
+        <table class="mic-table">
+          <tr><td>Shure SM 91A ★</td><td>Condenser Boundary, Half-Cardioid</td><td>20 – 10 000 Hz</td></tr>
+          <tr><td>Behringer BA 19A</td><td>Condenser Boundary, Half-Cardioid</td><td>50 Hz – 20 000 Hz</td></tr>
+          <tr><td>AKG C411 PF</td><td>Contact Condenser (piezo), Half-Cardioid</td><td>10 Hz – 20 000 Hz</td></tr>
+        </table>
+        <div class="note" style="margin: 8px 12px; font-size: 12px;">Shure SM 91A i Behringer BA 19A używane są wewnątrz bębna basowego (kick in bez dziury). AKG C411 to mikrofon kontaktowy – przyklejany bezpośrednio do instrumentu (fortepian, kontrabas).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ TABELA LOOKUP ══════════════════════════ -->
+  <div id="lookup" class="pat-section">
+    <div class="pat-header" style="background:#12151f;border-left:5px solid var(--border);border-radius:var(--radius);">
+      <div>
+        <h2 style="color: var(--text)">Szybkie wyszukiwanie – Mikrofon → Charakterystyka</h2>
+        <div class="pl">Wpisz nazwę mikrofonu aby znaleźć jego charakterystykę</div>
+      </div>
+    </div>
+    <input type="text" class="lookup-search" placeholder="Szukaj: np. Shure, Neumann, DPA, AKG..." oninput="filterTable(this.value)">
+    <div style="overflow-x:auto">
+    <table class="lookup-table" id="lookupTable">
+      <tr>
+        <th>Mikrofon</th>
+        <th>Charakterystyka</th>
+        <th>Typ</th>
+        <th>Pasmo</th>
+      </tr>
+      <!-- ─── DYNAMICZNE KARDIOIDALNE ─── -->
+      <tr class="lookup-row"><td>Shure SM57</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>40 Hz–15 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure SM7B</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>50 Hz–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser MD-421 MKII</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>30–17 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 604</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>40 Hz–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 904</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>40–18 000 Hz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 902</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>20–18 000 Hz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 602 II</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>20–16 000 Hz</td></tr>
+      <tr class="lookup-row"><td>AKG D112 MKII</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>20–17 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG D12 VR</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>17 Hz–17 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG P2</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>20–16 000 Hz</td></tr>
+      <tr class="lookup-row"><td>Electro-Voice RE20</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic (Variable-D)</td><td>45 Hz–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Electro-Voice RE320</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>30–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix D6</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>30 Hz–15 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix i-5</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>50 Hz–16 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix i-9</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Dynamic</td><td>30–18 kHz</td></tr>
+      <!-- ─── DYNAMICZNE SUPERKARDIOIDALNE ─── -->
+      <tr class="lookup-row"><td>Sennheiser E 906</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>40 Hz–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure Beta 57A</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>50 Hz–16 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure Beta 52A</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>20 Hz–10 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure Beta 56A</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>50 Hz–16 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser MD 441-U</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>30–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E x609</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>40–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Telefunken M80</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>50–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Telefunken M81 SH</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>30–18 kHz</td></tr>
+      <tr class="lookup-row"><td>sE Electronics V7</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>40–19 kHz</td></tr>
+      <tr class="lookup-row"><td>sE Electronics V Beat</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>30–19 kHz</td></tr>
+      <tr class="lookup-row"><td>SE Electronics V Kick</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Dynamic</td><td>20 Hz–19 kHz</td></tr>
+      <!-- ─── DYNAMICZNE HIPERKARDIOIDALNE ─── -->
+      <tr class="lookup-row"><td>Beyerdynamic M88TG</td><td><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkardioidalna</span></td><td>Dynamic</td><td>30–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Beyerdynamic M201TG</td><td><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkardioidalna</span></td><td>Dynamic</td><td>40–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix D2</td><td><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkardioidalna</span></td><td>Dynamic</td><td>44–18 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica ATM230</td><td><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkardioidalna</span></td><td>Dynamic</td><td>30–12 kHz</td></tr>
+      <!-- ─── DYNAMICZNE OMNI ─── -->
+      <tr class="lookup-row"><td>Shure 520DX</td><td><span class="pat-pill pp-o">Dookolna</span></td><td>Dynamic</td><td>100 Hz–5 kHz</td></tr>
+      <!-- ─── POJEMNOŚCIOWE KARDIOIDALNE ─── -->
+      <tr class="lookup-row"><td>Neumann KM184</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure SM81</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG C 451B</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Rode NT5</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Lewitt LCT 040</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Lewitt LCT 140</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure Beta 98 AD/C</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Earthworks SR30</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20 Hz–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Earthworks Audio DM20</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20 Hz–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 914</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG P 170</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure KSM 137</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>SE Electronics SE8</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica AT4041</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica 4051B</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix ADX 51</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>40–20 kHz</td></tr>
+      <tr class="lookup-row"><td>DPA 4011</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>DPA 4011A</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Schoeps MK4</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica ATM350</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.) clip-on</td><td>30–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica ATM 490</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>40–20 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG C 214</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann TLM 102</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann TLM 103</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann U47 FET</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>40–16 kHz</td></tr>
+      <tr class="lookup-row"><td>Rode NT1-A</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica AT-4060</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.) lampowy</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Beyerdynamic MC-930</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (sm.)</td><td>40–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser MK4</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Universal Audio SP-1</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser (lg.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann MCM 114</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser miniature</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audix ADX 20</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser miniature</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica ATM360</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser clip-on</td><td>30–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure Beta 98HC</td><td><span class="pat-pill pp-k">Kardioidalna</span></td><td>Condenser clip-on</td><td>20 Hz–20 kHz</td></tr>
+      <!-- ─── POJEMNOŚCIOWE SUPERKARDIOIDALNE ─── -->
+      <tr class="lookup-row"><td>DPA 4099</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Condenser miniature</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser E 614</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Condenser (sm.)</td><td>40–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser MKH 50</td><td><span class="pat-pill pp-s">Superkardioidalna</span></td><td>Condenser (sm.)</td><td>40–20 kHz</td></tr>
+      <!-- ─── RIBBON HIPERKARDIOIDALNA ─── -->
+      <tr class="lookup-row"><td>Beyerdynamic M160</td><td><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">Hiperkardioidalna</span></td><td>Ribbon</td><td>40 Hz–18 kHz</td></tr>
+      <!-- ─── POJEMNOŚCIOWE OMNI ─── -->
+      <tr class="lookup-row"><td>DPA 4060</td><td><span class="pat-pill pp-o">Dookolna</span></td><td>Condenser miniature</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Sennheiser MKE 2</td><td><span class="pat-pill pp-o">Dookolna</span></td><td>Condenser lavalier</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure MX183</td><td><span class="pat-pill pp-o">Dookolna</span></td><td>Condenser lavalier</td><td>20–20 kHz</td></tr>
+      <!-- ─── RIBBON FIGURE-8 ─── -->
+      <tr class="lookup-row"><td>Royer Labs R-121</td><td><span class="pat-pill pp-8">Ósemkowa</span></td><td>Ribbon</td><td>30–15 kHz</td></tr>
+      <tr class="lookup-row"><td>Royer R-10</td><td><span class="pat-pill pp-8">Ósemkowa</span></td><td>Ribbon</td><td>30–15 kHz</td></tr>
+      <tr class="lookup-row"><td>Coles 4038</td><td><span class="pat-pill pp-8">Ósemkowa</span></td><td>Ribbon</td><td>30–15 kHz</td></tr>
+      <tr class="lookup-row"><td>sE Electronics VR1</td><td><span class="pat-pill pp-8">Ósemkowa</span></td><td>Ribbon</td><td>20 Hz–18 kHz</td></tr>
+      <!-- ─── WIELOMEMBRANOWE ─── -->
+      <tr class="lookup-row"><td>AKG C414</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-s">S</span><span class="pat-pill pp-sub">Sub</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann U87 AI</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure KSM44A</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Lewitt LCT 441 FLEX</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-s">S</span><span class="pat-pill pp-sub">Sub</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Neumann TLM 107</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-s">S</span><span class="pat-pill pp-sub">Sub</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Telefunken U47 (Neumann U47)</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica AT4050</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span><span class="pat-pill pp-8">8</span></td><td>Condenser multi-pattern</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Audio-Technica AE2500</td><td><span class="pat-pill pp-k">K(C)</span><span class="pat-pill pp-k">K(D)</span></td><td>Condenser+Dynamic dual</td><td>20–17 kHz</td></tr>
+      <tr class="lookup-row"><td>Rode NT55</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span></td><td>Condenser (sm.), kapsuły</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>Shure KSM 141</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-o">O</span></td><td>Condenser (sm.)</td><td>20–20 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG C1000s MKIV</td><td><span class="pat-pill pp-k">K</span><span class="pat-pill pp-h" style="background:var(--hiper-bg);color:var(--hiper);border:1px solid var(--hiper)">H</span></td><td>Condenser (sm.)</td><td>50 Hz–20 kHz</td></tr>
+      <!-- ─── GRANICZNE ─── -->
+      <tr class="lookup-row"><td>Shure SM 91A</td><td><span class="pat-pill" style="background:var(--gran-bg);color:var(--gran);border:1px solid var(--gran)">Graniczna</span></td><td>Condenser Boundary</td><td>20–10 kHz</td></tr>
+      <tr class="lookup-row"><td>Behringer BA 19A</td><td><span class="pat-pill" style="background:var(--gran-bg);color:var(--gran);border:1px solid var(--gran)">Graniczna</span></td><td>Condenser Boundary</td><td>50 Hz–20 kHz</td></tr>
+      <tr class="lookup-row"><td>AKG C411 PF</td><td><span class="pat-pill" style="background:var(--gran-bg);color:var(--gran);border:1px solid var(--gran)">Graniczna (kontaktowy)</span></td><td>Condenser Contact</td><td>10 Hz–20 kHz</td></tr>
+    </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function filterTable(val) {
+  const rows = document.querySelectorAll('.lookup-row');
+  const q = val.toLowerCase().trim();
+  rows.forEach(r => {
+    const text = r.textContent.toLowerCase();
+    r.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+  });
+}
+</script>
+</body>
+</html>
